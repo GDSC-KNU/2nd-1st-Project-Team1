@@ -8,4 +8,10 @@ describe("App", () => {
     const helloWorld = screen.getByText("Hello World!");
     expect(screen.getByText(/Hello/i)).toBeDefined();
   });
+
+  it("should have a paragraph", () => {
+    render(<App />);
+    const paragraph = screen.getByText("Oops");
+    expect(paragraph).toBeDefined();
+  });
 });
