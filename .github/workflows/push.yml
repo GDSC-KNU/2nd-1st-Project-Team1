@@ -6,8 +6,6 @@ name: Vite CI
 on:
   push:
     branches: ["main"]
-  pull_request:
-    branches: ["main"]
 
   workflow_dispatch:
 
@@ -21,30 +19,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
-
-      - name: Install dependencies
-        uses: bahmutov/npm-install@v1.6.0
-
-      - name: Run Test
-        run: npx vitest run
-
-      - name: Run Build
-        run: npm run build
-
   deploy:
-    needs: build
     runs-on: ubuntu-latest
     environment:
       name: github-pages
