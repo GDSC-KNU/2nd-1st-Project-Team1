@@ -6,7 +6,7 @@ import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 // https://vitejs.dev/config/
 
 export default defineConfig({
-  base: "./",
+  base: "/2nd-1st-Project-Team1/",
   plugins: [react(), vanillaExtractPlugin()],
   test: {
     globals: true,
