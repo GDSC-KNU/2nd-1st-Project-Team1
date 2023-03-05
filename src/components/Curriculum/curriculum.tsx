@@ -1,5 +1,15 @@
 import { useEffect, useState } from "react";
 import { courseData, CourseType } from "./courseData";
+import {
+  curriculumContainer,
+  input,
+  resultDetails,
+  resultDetailsDesign,
+  resultDetailsRequired,
+  resultsContainer,
+  resultTitle,
+  resultWrapper,
+} from "./curriculum.css";
 
 const fetchedCourses = courseData;
 
@@ -43,22 +53,33 @@ const Curriculum = () => {
   }, [query]);
 
   return (
-    <aside>
-      <input type="text" value={query} onChange={updateQuery} />
+    <aside className={curriculumContainer}>
+      <input
+        className={input}
+        type="text"
+        value={query}
+        onChange={updateQuery}
+      />
 
-      <div>
+      <div className={resultsContainer}>
         {result.map(result => {
           return (
-            <div key={result.code}>
-              <h3>{result.name}</h3>
-              <div>
+            <div className={resultWrapper} key={result.code}>
+              <h3 className={resultTitle}>{result.name}</h3>
+              <div className={resultDetails}>
                 <span>{result.type} </span>
                 <span>{result.credit} </span>
                 <span>{result.code} </span>
                 <span>{result.year} </span>
                 <span>{result.semester} </span>
-                {result.required && <span>{result.required} </span>}
-                {result.design && <span>{result.design} </span>}
+                {result.required && (
+                  <span className={resultDetailsRequired}>
+                    {result.required}{" "}
+                  </span>
+                )}
+                {result.design && (
+                  <span className={resultDetailsDesign}>{result.design} </span>
+                )}
               </div>
             </div>
           );
