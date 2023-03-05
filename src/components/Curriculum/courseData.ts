@@ -1,4 +1,4 @@
-type CourseType = {
+export type CourseType = {
   name: string;
   code: string;
   type: "기본소양" | "전공기반" | "공학전공" | "교직";
