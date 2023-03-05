@@ -11,8 +11,17 @@ const Curriculum = () => {
     setQuery(e.target.value);
   };
 
+  const matchBy = (keys: (keyof CourseType)[], query: string) => {
+    return fetchedCourses.filter(course => {
+      for (const key of keys) {
+        if (course[key]?.toString().includes(query.toUpperCase())) return true;
+      }
+      return false;
+    });
+  };
+
   const updateResult = (query: string) => {
-    setResult(fetchedCourses.filter(course => course.name.includes(query)));
+    setResult(matchBy(["name", "code", "type"], query));
   };
 
   useEffect(() => {
