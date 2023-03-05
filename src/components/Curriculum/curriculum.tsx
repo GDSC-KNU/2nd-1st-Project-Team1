@@ -21,7 +21,21 @@ const Curriculum = () => {
   };
 
   const updateResult = (query: string) => {
-    setResult(matchBy(["name", "code", "type"], query));
+    setResult(
+      matchBy(
+        [
+          "name",
+          "code",
+          "type",
+          "credit",
+          "year",
+          "semester",
+          "required",
+          "design",
+        ],
+        query,
+      ),
+    );
   };
 
   useEffect(() => {
@@ -39,10 +53,12 @@ const Curriculum = () => {
               <h3>{result.name}</h3>
               <div>
                 <span>{result.type} </span>
-                <span>{result.credit}학점 </span>
+                <span>{result.credit} </span>
                 <span>{result.code} </span>
-                {result.required && <span>필수 </span>}
-                {result.design && <span>설계 </span>}
+                <span>{result.year} </span>
+                <span>{result.semester} </span>
+                {result.required && <span>{result.required} </span>}
+                {result.design && <span>{result.design} </span>}
               </div>
             </div>
           );
