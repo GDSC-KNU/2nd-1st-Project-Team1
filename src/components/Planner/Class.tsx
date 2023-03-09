@@ -1,4 +1,4 @@
-import { ClassBox } from "./Class.css";
+import { ClassBox, deleteClass, plusClass } from "./Class.css";
 
 interface ClassProps {
   className?: string;
@@ -21,10 +21,15 @@ const Class = ({
           <h5>
             {classType} {classCredit}
           </h5>
+          <button className={deleteClass} onClick={() => console.log(1)}>
+            x
+          </button>
         </>
       ) : (
         <>
-          <p>+</p>
+          <button className={plusClass} onClick={() => console.log(1)}>
+            +
+          </button>
         </>
       )}
     </div>
