@@ -17,6 +17,11 @@ const Semester = ({ backGroundColor, ...props }: SemesterProps) => {
       </div>
       <div className={SemesterMain}>
         <Class />
+        <Class />
+        <Class />
+        <Class />
+        <Class />
+        <Class />
       </div>
     </div>
   );

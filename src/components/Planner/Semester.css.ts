@@ -2,6 +2,7 @@ import { style } from "@vanilla-extract/css";
 
 export const SemesterBox = style({
   width: "100%",
+  height: "auto",
   border: "1px solid black",
   padding: "0.5rem",
 });
@@ -15,8 +16,11 @@ export const SemesterHeader = style({
 });
 
 export const SemesterMain = style({
+  width: "100%",
+  display: "flex",
   border: "1px solid black",
   borderRadius: "0 0.3rem 0.3rem 0.3rem",
+  padding: "0.5rem",
 });
 
 export const SemesterText = style({
