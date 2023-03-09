@@ -1,10 +1,32 @@
 import { ClassBox } from "./Class.css";
 
-const Class = () => {
+interface ClassProps {
+  className?: string;
+  classType?: string;
+  classCredit?: string;
+  active?: boolean;
+}
+
+const Class = ({
+  className,
+  classType,
+  classCredit,
+  active = true,
+}: ClassProps) => {
   return (
     <div className={ClassBox}>
-      <h3>Class</h3>
-      <h5>전공기반, 3학점</h5>
+      {active ? (
+        <>
+          <h3>{className}</h3>
+          <h5>
+            {classType} {classCredit}
+          </h5>
+        </>
+      ) : (
+        <>
+          <p>+</p>
+        </>
+      )}
     </div>
   );
 };
