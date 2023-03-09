@@ -11,6 +11,7 @@ const Planner = () => {
       <Semester />
       <Semester />
       <Semester />
+      <Semester active={false} />
     </div>
   );
 };
