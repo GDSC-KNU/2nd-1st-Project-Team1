@@ -17,5 +17,6 @@ export const CreditBox = style({
 
 export const CreditItem = style({
   padding: "0.5rem",
+  fontSize: "0.5rem",
   //   backgroundColor: "blue",
 });

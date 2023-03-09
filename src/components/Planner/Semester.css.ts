@@ -13,6 +13,8 @@ export const SemesterHeader = style({
   borderLeft: "1px solid black",
   borderRight: "1px solid black",
   borderRadius: "0.3rem 0.3rem 0 0",
+  borderBottom: "1px solid #fff",
+  zIndex: "10",
 });
 
 export const SemesterMain = style({

@@ -7,8 +7,8 @@ interface CreditProps {
 const Credit = ({ backgroundColor, ...props }: CreditProps) => {
   return (
     <div className={CreditBox}>
-      <h2 className={CreditItem}>기본소양</h2>
-      <h2 className={CreditItem}>3 / 15</h2>
+      <p className={CreditItem}>기본소양</p>
+      <p className={CreditItem}>3 / 15</p>
     </div>
   );
 };
