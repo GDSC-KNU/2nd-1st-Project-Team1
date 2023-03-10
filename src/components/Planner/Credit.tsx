@@ -1,4 +1,4 @@
-import { CreditItem, CreditBox } from "./Credit.css";
+import { CreditTitle, CreditPoint, CreditBox } from "./Credit.css";
 
 interface CreditProps {
   backgroundColor?: string;
@@ -7,8 +7,8 @@ interface CreditProps {
 const Credit = ({ backgroundColor, ...props }: CreditProps) => {
   return (
     <div className={CreditBox}>
-      <p className={CreditItem}>기본소양</p>
-      <p className={CreditItem}>3 / 15</p>
+      <p className={CreditTitle}>기본소양</p>
+      <p className={CreditPoint}>3 / 15</p>
     </div>
   );
 };

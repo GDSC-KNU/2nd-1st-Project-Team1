@@ -12,28 +12,33 @@ export const SemesterHeader = style({
   borderLeft: "1px solid black",
   borderRight: "1px solid black",
   borderRadius: "0.3rem 0.3rem 0 0",
-  borderBottom: "1px solid #fff",
   zIndex: "10",
   minHeight: "24px",
+  boxShadow: "1px 0px 6px rgb(0 0 0 / 16%), 2px 0px 0px rgb(0 0 0 / 23%)",
   selectors: {
     [`${SemesterBox}:hover &`]: {
-      backgroundColor: "#999",
+      // backgroundColor: "#999",
+      border: "1px solid blue",
+      borderBottom: "0px !important",
     },
   },
 });
 
 export const SemesterMain = style({
+  position: "relative",
   width: "100%",
   display: "flex",
   border: "1px solid black",
   borderRadius: "0 0.3rem 0.3rem 0.3rem",
-  padding: "0.5rem",
+  boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)",
+  padding: "1rem",
   minHeight: "100px",
   justifyContent: "center",
   alignItems: "center",
   selectors: {
     [`${SemesterBox}:hover &`]: {
-      backgroundColor: "#999",
+      // backgroundColor: "#999",
+      border: "1px solid blue",
     },
   },
 });
@@ -52,4 +57,12 @@ export const plusSemester = style({
   justifyContent: "center",
   border: "none",
   backgroundColor: "transparent",
+});
+
+export const SemesterCredit = style({
+  position: "absolute",
+  top: "0",
+  right: "1rem",
+  backgroundColor: "#f9dda7",
+  fontSize: "0.75rem",
 });

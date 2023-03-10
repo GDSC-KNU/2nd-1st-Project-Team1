@@ -15,8 +15,17 @@ export const CreditBox = style({
   justifyContent: "center",
 });
 
-export const CreditItem = style({
+export const CreditTitle = style({
+  width: "50%",
   padding: "0.5rem",
   fontSize: "0.5rem",
+  color: "white",
+  backgroundColor: "#ef8783",
+});
+export const CreditPoint = style({
+  width: "50%",
+  padding: "0.5rem",
+  fontSize: "0.5rem",
+  textAlign: "center",
   //   backgroundColor: "blue",
 });
