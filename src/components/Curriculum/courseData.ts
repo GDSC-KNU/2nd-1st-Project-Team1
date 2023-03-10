@@ -1,0 +1,133 @@
+export type CourseType = {
+  name: string;
+  code: string;
+  type: "기본소양" | "전공기반" | "공학전공" | "교직";
+  year: "1학년" | "2학년" | "3학년" | "4학년" | "전학년";
+  semester: "1학기" | "2학기" | "1-2학기";
+  credit: "1학점" | "2학점" | "3학점" | "4학점" | "5학점" | "6학점";
+  required: "필수" | null;
+  design: "설계" | null;
+};
+
+export const courseData: CourseType[] = [
+  {
+    name: "논리와 비판적 사고",
+    code: "CLTR0045",
+    type: "기본소양",
+    year: "1학년",
+    semester: "1학기",
+    credit: "3학점",
+    required: null,
+    design: null,
+  },
+  {
+    name: "소셜네트워크",
+    code: "CLTR0264",
+    type: "기본소양",
+    year: "1학년",
+    semester: "1학기",
+    credit: "3학점",
+    required: null,
+    design: null,
+  },
+  {
+    name: "수학1",
+    code: "CLTR0211",
+    type: "전공기반",
+    year: "1학년",
+    semester: "1학기",
+    credit: "3학점",
+    required: "필수",
+    design: null,
+  },
+  {
+    name: "물리학1",
+    code: "CLTR0213",
+    type: "전공기반",
+    year: "1학년",
+    semester: "1학기",
+    credit: "3학점",
+    required: "필수",
+    design: null,
+  },
+  {
+    name: "물리학실험1",
+    code: "CLTR0223",
+    type: "전공기반",
+    year: "1학년",
+    semester: "1학기",
+    credit: "1학점",
+    required: null,
+    design: null,
+  },
+  {
+    name: "이산수학",
+    code: "COME0301",
+    type: "전공기반",
+    year: "1학년",
+    semester: "2학기",
+    credit: "3학점",
+    required: "필수",
+    design: null,
+  },
+  {
+    name: "프로그래밍기초",
+    code: "COMP0204",
+    type: "전공기반",
+    year: "1학년",
+    semester: "2학기",
+    credit: "6학점",
+    required: "필수",
+    design: null,
+  },
+  {
+    name: "기초창의공학설계",
+    code: "COMP0205",
+    type: "전공기반",
+    year: "1학년",
+    semester: "2학기",
+    credit: "3학점",
+    required: "필수",
+    design: "설계",
+  },
+  {
+    name: "미래산업과 직업선택",
+    code: "CLTR0689",
+    type: "기본소양",
+    year: "2학년",
+    semester: "1학기",
+    credit: "3학점",
+    required: null,
+    design: null,
+  },
+  {
+    name: "자바프로그래밍",
+    code: "COMP0217",
+    type: "공학전공",
+    year: "2학년",
+    semester: "1학기",
+    credit: "3학점",
+    required: "필수",
+    design: null,
+  },
+  {
+    name: "자료구조",
+    code: "COME0331",
+    type: "공학전공",
+    year: "2학년",
+    semester: "1학기",
+    credit: "3학점",
+    required: "필수",
+    design: null,
+  },
+  {
+    name: "시스템프로그래밍",
+    code: "ELEC0462",
+    type: "공학전공",
+    year: "2학년",
+    semester: "2학기",
+    credit: "3학점",
+    required: "필수",
+    design: "설계",
+  },
+];
