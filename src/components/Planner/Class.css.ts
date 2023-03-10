@@ -5,6 +5,7 @@ export const ClassBox = style({
   alignItems: "center",
   flexDirection: "column",
   width: "25%",
+  minHeight: "66px",
   border: "1px solid black",
   padding: "0.5rem",
   justifyContent: "center",

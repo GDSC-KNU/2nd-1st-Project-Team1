@@ -3,6 +3,7 @@ import Class from "./Class";
 import {
   plusSemester,
   SemesterBox,
+  SemesterCredit,
   SemesterHeader,
   SemesterMain,
   SemesterText,
@@ -11,7 +12,8 @@ interface SemesterProps {
   backGroundColor?: string;
   active?: boolean;
   grade?: number;
-  semester?: string;
+  semester?: number;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 interface ClassProps {
@@ -26,9 +28,19 @@ const Semester = ({
   active = true,
   semester,
   grade,
+  onClick,
+  // semesterList,
   ...props
 }: SemesterProps) => {
   const [classList, setClassList] = useState<ClassProps[]>([]);
+  const addItem = (item: ClassProps) => {
+    setClassList([...classList, item]);
+  };
+  // const testSemester: SemesterProps = {
+  //   grade: 4,
+  //   semester: 4,
+  //   onClick
+  // };
   return (
     <div className={SemesterBox}>
       <div className={SemesterHeader}>
@@ -37,13 +49,14 @@ const Semester = ({
             {grade}학년 {semester}학기
           </h4>
         ) : (
-          <></>
+          <h4 className={SemesterText}></h4>
         )}
       </div>
 
       <div className={SemesterMain}>
         {active ? (
           <>
+            <h4 className={SemesterCredit}>9학점</h4>
             <Class className="수학 1" classCredit="3" classType="전공기반" />
             <Class className="수학 1" classCredit="3" classType="전공기반" />
             {classList &&
@@ -58,7 +71,15 @@ const Semester = ({
           </>
         ) : (
           <>
-            <button className={plusSemester}>+</button>
+            <button
+              className={plusSemester}
+              onClick={() => {
+                onClick;
+                console.log(1);
+              }}
+            >
+              +
+            </button>
           </>
         )}
       </div>
