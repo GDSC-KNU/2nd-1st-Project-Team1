@@ -1,7 +1,7 @@
-import { border } from "../../App.css";
 import Summary from "./Summary";
 import Semester from "./Semester";
 import { useState } from "react";
+import { PlannerContainer } from "./Planner.css";
 
 interface SemesterProps {
   backGroundColor?: string;
@@ -20,9 +20,8 @@ const Planner = () => {
     semester: 4,
   };
   return (
-    <div className={border}>
+    <div className={PlannerContainer}>
       <>
-        <h1>Planner</h1>
         <Summary />
         <Semester semester={1} grade={1} />
         {semesterList &&

@@ -5,7 +5,6 @@ import { ListBox, List } from "./Summary.css";
 const Summary = () => {
   return (
     <>
-      <div>Header</div>
       <div className={CreditList}>
         <Credit />
         <Credit />

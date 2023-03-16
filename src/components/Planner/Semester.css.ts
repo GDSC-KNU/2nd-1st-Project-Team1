@@ -15,6 +15,7 @@ export const SemesterHeader = style({
   zIndex: "10",
   minHeight: "24px",
   boxShadow: "1px 0px 6px rgb(0 0 0 / 16%), 2px 0px 0px rgb(0 0 0 / 23%)",
+  backgroundColor: "#fff",
   selectors: {
     [`${SemesterBox}:hover &`]: {
       // backgroundColor: "#999",
@@ -35,6 +36,7 @@ export const SemesterMain = style({
   minHeight: "100px",
   justifyContent: "center",
   alignItems: "center",
+  backgroundColor: "#fff",
   selectors: {
     [`${SemesterBox}:hover &`]: {
       // backgroundColor: "#999",
