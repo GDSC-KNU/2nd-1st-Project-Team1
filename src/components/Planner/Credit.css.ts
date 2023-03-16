@@ -13,6 +13,7 @@ export const CreditBox = style({
   borderTop: "1px solid black",
   borderBottom: "1px solid black",
   justifyContent: "center",
+  backgroundColor: "#fff",
 });
 
 export const CreditTitle = style({
@@ -21,6 +22,7 @@ export const CreditTitle = style({
   fontSize: "0.5rem",
   color: "white",
   backgroundColor: "#ef8783",
+  textAlign: "center",
 });
 export const CreditPoint = style({
   width: "50%",

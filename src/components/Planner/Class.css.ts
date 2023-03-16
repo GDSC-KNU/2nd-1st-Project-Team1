@@ -6,13 +6,15 @@ export const ClassBox = style({
   flexDirection: "column",
   width: "25%",
   minHeight: "66px",
-  border: "1px solid black",
+  // border: "1px solid black",
   padding: "0.5rem",
   justifyContent: "center",
   textAlign: "center",
   margin: "0.5rem",
   flex: "1",
   justifyItems: "center",
+  backgroundColor: "#FDF6FA",
+  boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)",
   ":hover": {
     backgroundColor: "#999",
   },
@@ -26,7 +28,7 @@ export const deleteClass = style({
   display: "none",
   textAlign: "center",
   justifyContent: "center",
-  border: "1px solid black",
+  // border: "1px solid black",
   selectors: {
     [`${ClassBox}:hover &`]: {
       display: "block",
