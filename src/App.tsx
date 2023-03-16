@@ -1,7 +1,7 @@
 import { AppWrapper } from "./App.css";
 
 import Curriculum from "./components/Curriculum/curriculum";
-import Planner from "./components/Planner/planner";
+import Planner from "./components/Planner/Planner";
 
 function App() {
   return (
