@@ -4,6 +4,7 @@ export const ClassBox = style({
   display: "flex",
   alignItems: "center",
   flexDirection: "column",
+  position: "relative",
   width: "25%",
   minHeight: "66px",
   // border: "1px solid black",
@@ -38,6 +39,7 @@ export const deleteClass = style({
 });
 
 export const plusClass = style({
+  position: "absolute",
   width: "100%",
   height: "100%",
   fontSize: "1.2rem",

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AddSemesterModal from "./AddSemesterModal";
 import Class from "./Class";
 import {
   plusSemester,
@@ -33,6 +34,15 @@ const Semester = ({
   ...props
 }: SemesterProps) => {
   const [classList, setClassList] = useState<ClassProps[]>([]);
+  const [openModal, setOpenModal] = useState<boolean>();
+  const ModalOpen = () => {
+    setOpenModal(true);
+    console.log(openModal);
+    if (!openModal) {
+      return <></>;
+    }
+    return <AddSemesterModal />;
+  };
   const addItem = (item: ClassProps) => {
     setClassList([...classList, item]);
   };
@@ -43,6 +53,9 @@ const Semester = ({
   // };
   return (
     <div className={SemesterBox}>
+      {openModal && (
+        <AddSemesterModal openModal={openModal} setOpenModal={setOpenModal} />
+      )}
       <div className={SemesterHeader}>
         {active ? (
           <h4 className={SemesterText}>
@@ -71,13 +84,7 @@ const Semester = ({
           </>
         ) : (
           <>
-            <button
-              className={plusSemester}
-              onClick={() => {
-                onClick;
-                console.log(1);
-              }}
-            >
+            <button className={plusSemester} onClick={() => ModalOpen()}>
               +
             </button>
           </>
