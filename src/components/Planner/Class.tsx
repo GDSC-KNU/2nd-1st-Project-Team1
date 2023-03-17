@@ -1,3 +1,6 @@
+import { useContext, useState } from "react";
+import BackgroundModal from "../Modal/BackgroundModal";
+import AddClassModal from "./AddSemesterModal";
 import { ClassBox, deleteClass, plusClass } from "./Class.css";
 
 interface ClassProps {
@@ -27,7 +30,10 @@ const Class = ({
         </>
       ) : (
         <>
-          <button className={plusClass} onClick={() => console.log(1)}>
+          <button
+            className={plusClass}
+            onClick={() => console.log("plusClass")}
+          >
             +
           </button>
         </>
