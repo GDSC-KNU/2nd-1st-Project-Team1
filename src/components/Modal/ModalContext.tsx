@@ -1,9 +1,32 @@
-import { createContext, useContext } from "react";
+import { createContext, useState } from "react";
 
-export const ModalContext = createContext(false);
-export const useMyContext = () => {
-  const value = useContext(ModalContext);
-  if (value === undefined) {
-    throw new Error("useMyContext should be used within MyContext.Provider");
-  }
+const ModalContext = createContext({
+  open: false,
+  openModal: () => {
+    return;
+  },
+});
+
+interface Props {
+  children: JSX.Element | JSX.Element[];
+}
+
+const ModalProvider = ({ children }: Props): JSX.Element => {
+  const [open, setOpen] = useState(false);
+
+  const openModal = (): void => {
+    setOpen(!open);
+  };
+  return (
+    <ModalContext.Provider
+      value={{
+        openModal,
+        open,
+      }}
+    >
+      {children}
+    </ModalContext.Provider>
+  );
 };
+
+export { ModalContext, ModalProvider };

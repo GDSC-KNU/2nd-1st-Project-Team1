@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import BackgroundModal from "../Modal/BackgroundModal";
-import AddClassModal from "./AddSemesterModal";
+import AddClassModal from "../Modal/AddSemesterModal";
 import { ClassBox, deleteClass, plusClass } from "./Class.css";
 
 interface ClassProps {

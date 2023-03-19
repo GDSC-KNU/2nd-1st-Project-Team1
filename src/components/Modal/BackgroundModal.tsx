@@ -5,14 +5,13 @@ import {
   ModalContainerVars,
 } from "./BackgroundModal.css";
 import { assignInlineVars } from "@vanilla-extract/dynamic";
-
+import { ModalContext } from "./ModalContext";
+import { useContext } from "react";
 interface BackgroundModalProps {
   children: ReactElement;
   width: string;
   p: string;
   onClick?: () => void;
-  openModal: boolean;
-  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const BackgroundModal = ({
@@ -20,16 +19,16 @@ const BackgroundModal = ({
   width,
   p,
   onClick,
-  openModal,
-  setOpenModal,
 }: BackgroundModalProps) => {
-  const [showModal, setShowModal] = useState<boolean>(openModal);
+  // const [showModal, setShowModal] = useState<boolean>(openModal);
+  const { openModal, open } = useContext(ModalContext);
   const closeModal = () => {
     if (onClick) {
       onClick();
     } else {
-      setShowModal(false);
-      setOpenModal(false);
+      // setShowModal(false);
+      // setOpenModal(false);
+      openModal();
     }
   };
 
