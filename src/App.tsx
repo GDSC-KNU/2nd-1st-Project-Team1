@@ -1,8 +1,7 @@
 import { AppWrapper } from "./App.css";
-
+import { ModalProvider } from "./components/Modal/ModalContext";
 import Curriculum from "./components/Curriculum/curriculum";
 import Planner from "./components/Planner/Planner";
-import { ModalProvider } from "./components/Modal/ModalContext";
 
 function App() {
   return (
