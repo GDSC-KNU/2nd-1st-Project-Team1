@@ -1,5 +1,5 @@
-import { useState } from "react";
-import AddSemesterModal from "./AddSemesterModal";
+import { useContext, useState } from "react";
+import AddSemesterModal from "../Modal/AddSemesterModal";
 import Class from "./Class";
 import {
   plusSemester,
@@ -9,6 +9,7 @@ import {
   SemesterMain,
   SemesterText,
 } from "./Semester.css";
+import { ModalContext } from "../Modal/ModalContext";
 interface SemesterProps {
   backGroundColor?: string;
   active?: boolean;
@@ -34,11 +35,12 @@ const Semester = ({
   ...props
 }: SemesterProps) => {
   const [classList, setClassList] = useState<ClassProps[]>([]);
-  const [openModal, setOpenModal] = useState<boolean>();
+  // const [open, setOpen] = useState<boolean>();
+  const { openModal, open: modalOpen } = useContext(ModalContext);
   const ModalOpen = () => {
-    setOpenModal(true);
-    console.log(openModal);
-    if (!openModal) {
+    // setOpen(true);
+    openModal();
+    if (!modalOpen) {
       return <></>;
     }
     return <AddSemesterModal />;
@@ -53,9 +55,7 @@ const Semester = ({
   // };
   return (
     <div className={SemesterBox}>
-      {openModal && (
-        <AddSemesterModal openModal={openModal} setOpenModal={setOpenModal} />
-      )}
+      {modalOpen && <AddSemesterModal />}
       <div className={SemesterHeader}>
         {active ? (
           <h4 className={SemesterText}>
@@ -80,7 +80,7 @@ const Semester = ({
                   classType={item.classType}
                 />;
               })}
-            <Class active={false} />
+            {/* <Class active={false} /> */}
           </>
         ) : (
           <>
