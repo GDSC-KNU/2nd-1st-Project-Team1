@@ -77,20 +77,38 @@ const Semester = ({
 
       <div className={SemesterMain}>
         {active ? (
-          <>
-            <h4 className={SemesterCredit}>9학점</h4>
-            <Class className="수학 1" classCredit="3" classType="전공기반" />
-            <Class className="수학 1" classCredit="3" classType="전공기반" />
-            {classList &&
-              classList.map(item => {
-                <Class
-                  className={item.className}
-                  classCredit={item.classCredit}
-                  classType={item.classType}
-                />;
-              })}
-            {/* <Class active={false} /> */}
-          </>
+          <DragDropContext onDragEnd={handleChange}>
+            <Droppable droppableId="communities">
+              {provided => (
+                <>
+                  <h4 className={SemesterCredit}>9학점</h4>
+                  {classList &&
+                    classList.map((item: any, idx: number) => {
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id}
+                        index={idx}
+                      >
+                        {provided => (
+                          <li
+                            ref={provided.innerRef}
+                            {...provided.dragHandleProps}
+                            {...provided.draggableProps}
+                          >
+                            <Class
+                              className={item.className}
+                              classCredit={item.classCredit}
+                              classType={item.classType}
+                            />
+                          </li>
+                        )}
+                      </Draggable>;
+                    })}
+                  {/* <Class active={false} /> */}
+                </>
+              )}
+            </Droppable>
+          </DragDropContext>
         ) : (
           <>
             <button className={plusSemester} onClick={() => ModalOpen()}>
