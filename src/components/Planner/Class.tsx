@@ -8,12 +8,14 @@ interface ClassProps {
   classType?: string;
   classCredit?: string;
   active?: boolean;
+  id?: number;
 }
 
 const Class = ({
   className,
   classType,
   classCredit,
+  id,
   active = true,
 }: ClassProps) => {
   return (
