@@ -4,7 +4,7 @@ import CheckBox from "./CheckBox";
 export const border = style({
     border: "3px solid green",
     height: "60vh",
-  });
+});
 
 export const input = style({
   width: "30px",
@@ -12,7 +12,7 @@ export const input = style({
   marginRight: "10px",
   marginLeft: "10px",
   accentColor: "#f75c5c",
-})
+});
 
 export const CheckOption = style({
   display: "inline-block",
@@ -21,7 +21,8 @@ export const CheckOption = style({
   lineHeight: "200px",
   position: "relative",
   top: "-10px",
-})
+  fontWeight: "bold",
+});
 
 export const upDown = style({
   display: "inline-block",
@@ -32,8 +33,28 @@ export const upDown = style({
   marginLeft: "2px",
   marginRight: "2px",
   textAlign: "center",
-})
+});
 
 export const counting = style({
   width: "50px",
-})
+});
+
+export const countButton = style({
+  backgroundColor: "#D9D9D9",
+  color: "white",
+  border: "none",
+  width: "1.2rem",
+  height: "1.2rem",
+  marginLeft: "2.5px",
+  marginRight: "2.5px",
+  borderRadius: "2px",
+});
+
+export const saveButton = style({
+  backgroundColor: "#FF000080",
+  color: "white",
+  border: "none",
+  borderRadius: "5px",
+  padding: "0.5rem 1rem",
+  width: "3.5rem",
+});
