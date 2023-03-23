@@ -1,11 +1,34 @@
 import { style } from "@vanilla-extract/css";
 
+export const List = style({
+  listStyle: "none",
+});
+
+export const ListBox = style({
+  display: "flex",
+  alignItems: "center",
+  flexDirection: "column",
+  position: "relative",
+  width: "50%",
+  minHeight: "66px",
+  float: "left",
+  // border: "1px solid black",
+  padding: "0.5rem",
+  justifyContent: "center",
+  textAlign: "center",
+  margin: "0.5rem",
+  flex: "1",
+  justifyItems: "center",
+  backgroundColor: "white",
+  boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)",
+});
+
 export const ClassBox = style({
   display: "flex",
   alignItems: "center",
   flexDirection: "column",
   position: "relative",
-  width: "25%",
+  width: "80%",
   minHeight: "66px",
   // border: "1px solid black",
   padding: "0.5rem",
