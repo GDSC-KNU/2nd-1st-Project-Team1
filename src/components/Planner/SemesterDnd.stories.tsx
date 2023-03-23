@@ -18,4 +18,4 @@ const Template: ComponentStory<typeof SemesterDnd> = args => (
   <SemesterDnd {...args} />
 );
 
-export const SemesterExm = Template.bind({});
+export const SemesterDndTest = Template.bind({});
