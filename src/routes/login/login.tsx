@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { loginContainer, capImage, input, loginButton, signUpGuide, signUpLink } from "./Login.css";
+import {
+  loginContainer,
+  capImage,
+  input,
+  loginButton,
+  signUpGuide,
+  signUpLink,
+} from "./login.css";
 
 const Login = () => {
   const [id, setId] = useState("");
