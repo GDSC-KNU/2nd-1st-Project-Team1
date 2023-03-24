@@ -1,12 +1,12 @@
 export type CourseType = {
   name: string;
   code: string;
-  type: "기본소양" | "전공기반" | "공학전공" | "교직";
+  type: "전체" | "기본소양" | "전공기반" | "공학전공" | "교직";
   year: "1학년" | "2학년" | "3학년" | "4학년" | "전학년";
-  semester: "1학기" | "2학기" | "1-2학기" | "여름학기" | "겨울학기";
-  credit: "1학점" | "2학점" | "3학점" | "4학점" | "5학점" | "6학점";
-  required: "필수" | null;
-  design: "설계" | null;
+  semester: "전학기" | "1학기" | "2학기";
+  credit: "전체" | "1학점" | "2학점" | "3학점" | "4학점" | "5학점" | "6학점";
+  required: "전체" | "필수" | "선택";
+  design: "전체" | "설계" | "비설계";
 };
 
 export const courseData: CourseType[] = [
@@ -17,8 +17,8 @@ export const courseData: CourseType[] = [
     year: "1학년",
     semester: "1학기",
     credit: "3학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
   {
     name: "소셜네트워크",
@@ -27,8 +27,8 @@ export const courseData: CourseType[] = [
     year: "1학년",
     semester: "1학기",
     credit: "3학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
   {
     name: "수학1",
@@ -38,7 +38,7 @@ export const courseData: CourseType[] = [
     semester: "1학기",
     credit: "3학점",
     required: "필수",
-    design: null,
+    design: "비설계",
   },
   {
     name: "물리학1",
@@ -48,7 +48,7 @@ export const courseData: CourseType[] = [
     semester: "1학기",
     credit: "3학점",
     required: "필수",
-    design: null,
+    design: "비설계",
   },
   {
     name: "물리학실험1",
@@ -57,8 +57,8 @@ export const courseData: CourseType[] = [
     year: "1학년",
     semester: "1학기",
     credit: "1학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
   {
     name: "컴퓨팅사고와 SW코딩",
@@ -67,8 +67,8 @@ export const courseData: CourseType[] = [
     year: "1학년",
     semester: "1학기",
     credit: "3학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
   {
     name: "컴퓨터학개론",
@@ -77,8 +77,8 @@ export const courseData: CourseType[] = [
     year: "1학년",
     semester: "1학기",
     credit: "3학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
   {
     name: "실용화법",
@@ -87,8 +87,8 @@ export const courseData: CourseType[] = [
     year: "1학년",
     semester: "2학기",
     credit: "3학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
   {
     name: "대학글쓰기",
@@ -97,8 +97,8 @@ export const courseData: CourseType[] = [
     year: "1학년",
     semester: "2학기",
     credit: "3학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
   {
     name: "이산수학",
@@ -108,7 +108,7 @@ export const courseData: CourseType[] = [
     semester: "2학기",
     credit: "3학점",
     required: "필수",
-    design: null,
+    design: "비설계",
   },
   {
     name: "프로그래밍기초",
@@ -118,7 +118,7 @@ export const courseData: CourseType[] = [
     semester: "2학기",
     credit: "6학점",
     required: "필수",
-    design: null,
+    design: "비설계",
   },
   {
     name: "기초창의공학설계",
@@ -137,8 +137,8 @@ export const courseData: CourseType[] = [
     year: "2학년",
     semester: "1학기",
     credit: "3학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
   {
     name: "자바프로그래밍",
@@ -148,7 +148,7 @@ export const courseData: CourseType[] = [
     semester: "1학기",
     credit: "3학점",
     required: "필수",
-    design: null,
+    design: "비설계",
   },
   {
     name: "자료구조",
@@ -158,7 +158,7 @@ export const courseData: CourseType[] = [
     semester: "1학기",
     credit: "3학점",
     required: "필수",
-    design: null,
+    design: "비설계",
   },
   {
     name: "자료구조응용",
@@ -167,8 +167,8 @@ export const courseData: CourseType[] = [
     year: "2학년",
     semester: "1학기",
     credit: "3학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
   {
     name: "오토마타 및 형식언어",
@@ -177,8 +177,8 @@ export const courseData: CourseType[] = [
     year: "2학년",
     semester: "1학기",
     credit: "3학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
   {
     name: "논리회로",
@@ -187,8 +187,8 @@ export const courseData: CourseType[] = [
     year: "2학년",
     semester: "1학기",
     credit: "3학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
   {
     name: "확률 및 통계",
@@ -197,8 +197,8 @@ export const courseData: CourseType[] = [
     year: "2학년",
     semester: "2학기",
     credit: "3학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
   {
     name: "데이터과학기초",
@@ -207,8 +207,8 @@ export const courseData: CourseType[] = [
     year: "2학년",
     semester: "2학기",
     credit: "3학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
   {
     name: "선형대수",
@@ -217,8 +217,8 @@ export const courseData: CourseType[] = [
     year: "2학년",
     semester: "2학기",
     credit: "3학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
   {
     name: "소프트웨어설계",
@@ -227,7 +227,7 @@ export const courseData: CourseType[] = [
     year: "2학년",
     semester: "2학기",
     credit: "3학점",
-    required: null,
+    required: "선택",
     design: "설계",
   },
   {
@@ -237,7 +237,7 @@ export const courseData: CourseType[] = [
     year: "2학년",
     semester: "2학기",
     credit: "3학점",
-    required: null,
+    required: "선택",
     design: "설계",
   },
   {
@@ -248,7 +248,7 @@ export const courseData: CourseType[] = [
     semester: "2학기",
     credit: "3학점",
     required: "필수",
-    design: null,
+    design: "비설계",
   },
   {
     name: "시스템프로그래밍",
@@ -268,7 +268,7 @@ export const courseData: CourseType[] = [
     semester: "1학기",
     credit: "3학점",
     required: "필수",
-    design: null,
+    design: "비설계",
   },
   {
     name: "운영체제",
@@ -278,7 +278,7 @@ export const courseData: CourseType[] = [
     semester: "1학기",
     credit: "3학점",
     required: "필수",
-    design: null,
+    design: "비설계",
   },
   {
     name: "네트워크프로그래밍",
@@ -287,8 +287,8 @@ export const courseData: CourseType[] = [
     year: "3학년",
     semester: "1학기",
     credit: "3학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
   {
     name: "일반생명과학1",
@@ -297,8 +297,8 @@ export const courseData: CourseType[] = [
     year: "2학년",
     semester: "1학기",
     credit: "3학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
   {
     name: "데이타베이스",
@@ -307,8 +307,8 @@ export const courseData: CourseType[] = [
     year: "3학년",
     semester: "2학기",
     credit: "3학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
   {
     name: "종합설계프로젝트1",
@@ -317,8 +317,8 @@ export const courseData: CourseType[] = [
     year: "3학년",
     semester: "2학기",
     credit: "4학점",
-    required: '필수',
-    design: '설계',
+    required: "필수",
+    design: "설계",
   },
   {
     name: "모바일앱프로그래밍1",
@@ -327,8 +327,8 @@ export const courseData: CourseType[] = [
     year: "3학년",
     semester: "2학기",
     credit: "3학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
   {
     name: "컴퓨터망",
@@ -337,8 +337,8 @@ export const courseData: CourseType[] = [
     year: "4학년",
     semester: "1학기",
     credit: "3학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
   {
     name: "종합설계프로젝트2",
@@ -357,10 +357,9 @@ export const courseData: CourseType[] = [
     year: "4학년",
     semester: "1학기",
     credit: "4학점",
-    required: null,
-    design: null,
-  }
-  ,
+    required: "선택",
+    design: "비설계",
+  },
   {
     name: "대규모병렬컴퓨팅",
     code: "ITEC0418",
@@ -368,7 +367,7 @@ export const courseData: CourseType[] = [
     year: "4학년",
     semester: "2학기",
     credit: "3학점",
-    required: null,
-    design: null,
+    required: "선택",
+    design: "비설계",
   },
 ];
