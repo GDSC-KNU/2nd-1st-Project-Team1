@@ -1,7 +1,9 @@
+import SummaryContainer from '../../components/Summary/SummaryContainer';
+
 const Summary = () => {
   return (
     <div>
-      <h1>Summary</h1>
+      <SummaryContainer />
     </div>
   );
 };

@@ -1,5 +1,4 @@
 import { style } from "@vanilla-extract/css";
-import CheckBox from "./CheckBox";
 
 export const border = style({
     border: "3px solid green",
@@ -43,8 +42,8 @@ export const countButton = style({
   backgroundColor: "#D9D9D9",
   color: "white",
   border: "none",
-  width: "1.2rem",
-  height: "1.2rem",
+  width: "1rem",
+  height: "1rem",
   marginLeft: "2.5px",
   marginRight: "2.5px",
   borderRadius: "2px",
@@ -57,4 +56,6 @@ export const saveButton = style({
   borderRadius: "5px",
   padding: "0.5rem 1rem",
   width: "3.5rem",
+  position: "absolute",
+  right: "4rem",
 });
