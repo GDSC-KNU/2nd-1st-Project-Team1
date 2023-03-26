@@ -1,4 +1,4 @@
-import SummaryContainer from '../../components/Summary/SummaryContainer';
+import SummaryContainer from "../../components/Summary/SummaryContainer";
 
 const Summary = () => {
   return (
