@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AddSemesterModal from "../Modal/AddSemesterModal";
 import Class from "./Class";
 import {
@@ -10,7 +10,13 @@ import {
   SemesterText,
 } from "./Semester.css";
 import { ModalContext } from "../Modal/ModalContext";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DropResult,
+} from "react-beautiful-dnd";
+import { ClassBox, List, ListBox } from "./Class.css";
 interface SemesterProps {
   backGroundColor?: string;
   active?: boolean;
@@ -24,9 +30,10 @@ interface ClassProps {
   classType?: string;
   classCredit?: string;
   active?: boolean;
+  id: string;
 }
 
-const Semester = ({
+const SemesterDnd = ({
   backGroundColor,
   active = true,
   semester,
@@ -35,7 +42,18 @@ const Semester = ({
   // semesterList,
   ...props
 }: SemesterProps) => {
-  const [classList, setClassList] = useState<ClassProps[]>([]);
+  const [classList, setClassList] = useState<ClassProps[]>([
+    { id: "crtl1", className: "test", classCredit: "3", classType: "전공" },
+    { id: "crtl2", className: "test", classCredit: "3", classType: "교양" },
+    { id: "crtl3", className: "test", classCredit: "3", classType: "전공필수" },
+    { id: "crtl4", className: "test", classCredit: "3", classType: "기본소양" },
+  ]);
+  const [demoList, setDemoList] = useState<ClassProps[]>([
+    { id: "crtl5", className: "test", classCredit: "3", classType: "전공" },
+    { id: "crtl6", className: "test", classCredit: "3", classType: "교양" },
+    { id: "crtl7", className: "test", classCredit: "3", classType: "전공필수" },
+    { id: "crtl8", className: "test", classCredit: "3", classType: "기본소양" },
+  ]);
   // const [open, setOpen] = useState<boolean>();
   const { openModal, open: modalOpen } = useContext(ModalContext);
   const ModalOpen = () => {
@@ -46,22 +64,30 @@ const Semester = ({
     }
     return <AddSemesterModal />;
   };
-  const addItem = (item: ClassProps) => {
-    setClassList([...classList, item]);
-  };
-  // const testSemester: SemesterProps = {
-  //   grade: 4,
-  //   semester: 4,
-  //   onClick
-  // };
-
-  const handleChange = (result: any) => {
+  classList.map((item: ClassProps, idx: number) => {
+    console.log(item, idx);
+  });
+  const handleChange = (result: DropResult) => {
     if (!result.destination) return;
-    const items = [...classList];
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    setClassList(items);
+    console.log(result.destination.droppableId);
+    if (result.destination.droppableId == "communities") {
+      const items = [...classList];
+      const [reorderedItem] = items.splice(result.source.index, 1);
+      items.splice(result.destination.index, 0, reorderedItem);
+      setClassList(items);
+    }
+    if (result.destination.droppableId == "demos") {
+      const items = [...demoList];
+      const [reorderedItem] = items.splice(result.source.index, 1);
+      items.splice(result.destination.index, 0, reorderedItem);
+      setDemoList(items);
+    }
   };
+  // if (classList === null) return <>?</>;
+
+  useEffect(() => {
+    console.log(classList);
+  }, [classList]);
   return (
     <div className={SemesterBox}>
       {modalOpen && <AddSemesterModal />}
@@ -77,20 +103,48 @@ const Semester = ({
 
       <div className={SemesterMain}>
         {active ? (
-          <>
-            <h4 className={SemesterCredit}>9학점</h4>
-            <Class className="수학 1" classCredit="3" classType="전공기반" />
-            <Class className="수학 1" classCredit="3" classType="전공기반" />
-            {classList &&
-              classList.map(item => {
-                <Class
-                  className={item.className}
-                  classCredit={item.classCredit}
-                  classType={item.classType}
-                />;
-              })}
-            {/* <Class active={false} /> */}
-          </>
+          <DragDropContext onDragEnd={handleChange}>
+            <Droppable droppableId="communities">
+              {provided => (
+                <ul
+                  className={List}
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  <h4 className={SemesterCredit}>9학점</h4>
+                  <>
+                    {classList &&
+                      classList.map((item, idx) => {
+                        return (
+                          <Draggable
+                            key={item.id}
+                            draggableId={item.id}
+                            index={idx}
+                          >
+                            {provided => (
+                              <li
+                                className={ListBox}
+                                ref={provided.innerRef}
+                                {...provided.dragHandleProps}
+                                {...provided.draggableProps}
+                              >
+                                <Class
+                                  className={item.className}
+                                  classCredit={item.classCredit}
+                                  classType={item.classType}
+                                  id={idx}
+                                />
+                              </li>
+                            )}
+                          </Draggable>
+                        );
+                      })}
+                  </>
+                  {provided.placeholder}
+                </ul>
+              )}
+            </Droppable>
+          </DragDropContext>
         ) : (
           <>
             <button className={plusSemester} onClick={() => ModalOpen()}>
@@ -103,4 +157,4 @@ const Semester = ({
   );
 };
 
-export default Semester;
+export default SemesterDnd;
