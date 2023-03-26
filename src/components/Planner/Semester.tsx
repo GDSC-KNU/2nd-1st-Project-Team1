@@ -48,12 +48,6 @@ const SemesterDnd = ({
     { id: "crtl3", className: "test", classCredit: "3", classType: "전공필수" },
     { id: "crtl4", className: "test", classCredit: "3", classType: "기본소양" },
   ]);
-  const [demoList, setDemoList] = useState<ClassProps[]>([
-    { id: "crtl5", className: "test", classCredit: "3", classType: "전공" },
-    { id: "crtl6", className: "test", classCredit: "3", classType: "교양" },
-    { id: "crtl7", className: "test", classCredit: "3", classType: "전공필수" },
-    { id: "crtl8", className: "test", classCredit: "3", classType: "기본소양" },
-  ]);
   // const [open, setOpen] = useState<boolean>();
   const { openModal, open: modalOpen } = useContext(ModalContext);
   const ModalOpen = () => {
@@ -64,30 +58,9 @@ const SemesterDnd = ({
     }
     return <AddSemesterModal />;
   };
-  classList.map((item: ClassProps, idx: number) => {
-    console.log(item, idx);
-  });
-  const handleChange = (result: DropResult) => {
-    if (!result.destination) return;
-    console.log(result.destination.droppableId);
-    if (result.destination.droppableId == "communities") {
-      const items = [...classList];
-      const [reorderedItem] = items.splice(result.source.index, 1);
-      items.splice(result.destination.index, 0, reorderedItem);
-      setClassList(items);
-    }
-    if (result.destination.droppableId == "demos") {
-      const items = [...demoList];
-      const [reorderedItem] = items.splice(result.source.index, 1);
-      items.splice(result.destination.index, 0, reorderedItem);
-      setDemoList(items);
-    }
-  };
+
   // if (classList === null) return <>?</>;
 
-  useEffect(() => {
-    console.log(classList);
-  }, [classList]);
   return (
     <div className={SemesterBox}>
       {modalOpen && <AddSemesterModal />}
@@ -103,48 +76,47 @@ const SemesterDnd = ({
 
       <div className={SemesterMain}>
         {active ? (
-          <DragDropContext onDragEnd={handleChange}>
-            <Droppable droppableId="communities">
-              {provided => (
-                <ul
-                  className={List}
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                >
-                  <h4 className={SemesterCredit}>9학점</h4>
-                  <>
-                    {classList &&
-                      classList.map((item, idx) => {
-                        return (
-                          <Draggable
-                            key={item.id}
-                            draggableId={item.id}
-                            index={idx}
-                          >
-                            {provided => (
-                              <li
-                                className={ListBox}
-                                ref={provided.innerRef}
-                                {...provided.dragHandleProps}
-                                {...provided.draggableProps}
-                              >
-                                <Class
-                                  className={item.className}
-                                  classCredit={item.classCredit}
-                                  classType={item.classType}
-                                  id={idx}
-                                />
-                              </li>
-                            )}
-                          </Draggable>
-                        );
-                      })}
-                  </>
-                  {provided.placeholder}
-                </ul>
-              )}
-            </Droppable>
-          </DragDropContext>
+          <Droppable droppableId="communities">
+            {provided => (
+              <ul
+                className={List}
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                <h4 className={SemesterCredit}>9학점</h4>
+                <>
+                  {classList &&
+                    classList.map((item, idx) => {
+                      return (
+                        <Draggable
+                          key={item.id}
+                          draggableId={item.id}
+                          index={idx}
+                        >
+                          {provided => (
+                            <li
+                              className={ListBox}
+                              ref={provided.innerRef}
+                              {...provided.dragHandleProps}
+                              {...provided.draggableProps}
+                            >
+                              <Class
+                                className={item.className}
+                                classCredit={item.classCredit}
+                                classType={item.classType}
+                                id={item.id}
+                                index={idx}
+                              />
+                            </li>
+                          )}
+                        </Draggable>
+                      );
+                    })}
+                </>
+                {provided.placeholder}
+              </ul>
+            )}
+          </Droppable>
         ) : (
           <>
             <button className={plusSemester} onClick={() => ModalOpen()}>

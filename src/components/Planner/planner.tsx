@@ -2,7 +2,6 @@ import Summary from "./Summary";
 import Semester from "./Semester";
 import { useState } from "react";
 import { PlannerContainer } from "./Planner.css";
-import SemesterDnd from "./SemesterDnd";
 
 interface SemesterProps {
   backGroundColor?: string;
@@ -25,11 +24,11 @@ const Planner = () => {
       <>
         <Summary />
         <Semester semester={1} grade={1} />
-        <SemesterDnd semester={1} grade={2} />
+        <Semester semester={1} grade={2} />
         {semesterList &&
           semesterList.map(semester => {
             // <Semester semester={semester.semester} grade={semester.grade} />;
-            <SemesterDnd semester={semester.semester} grade={semester.grade} />;
+            <Semester semester={semester.semester} grade={semester.grade} />;
           })}
         <Semester active={false} onClick={() => addSemester(testSemester)} />
       </>
