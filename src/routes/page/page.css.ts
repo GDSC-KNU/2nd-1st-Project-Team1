@@ -18,3 +18,11 @@ export const grid = style({
 });
 
 export default {};
+
+/////////
+
+export const myPageWrapper = style({
+	display: "grid",
+  gridTemplateColumns: "1fr 2fr",
+  gap: "1rem",
+});
