@@ -1,6 +1,13 @@
+import BasicInfo from "../../components/MyPage/BasicInfo";
+import MyPageMenu from "../../components/MyPage/MyPageMenu";
+import { myPageWrapper } from "./page.css";
+
 const Page = () => {
   return (
-    <div><h1>Page</h1></div>
+    <div className={myPageWrapper}>
+      <MyPageMenu />
+      <BasicInfo />
+    </div>
   )};
 
   export default Page;
