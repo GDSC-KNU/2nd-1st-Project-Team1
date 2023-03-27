@@ -47,6 +47,7 @@ export const countButton = style({
   marginLeft: "2.5px",
   marginRight: "2.5px",
   borderRadius: "2px",
+  cursor: "pointer",
 });
 
 export const saveButton = style({
@@ -55,7 +56,8 @@ export const saveButton = style({
   border: "none",
   borderRadius: "5px",
   padding: "0.5rem 1rem",
-  width: "3.5rem",
+  width: "4rem",
   position: "absolute",
   right: "4rem",
+  cursor: "pointer",
 });
