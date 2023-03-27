@@ -17,7 +17,11 @@ interface ITaskProps {
   task: {
     id: string;
     content: string;
+    className?: string;
+    classType?: string;
+    classCredit?: string;
   };
+
   index: number;
 }
 const Class = ({ task, index }: ITaskProps) => {
@@ -37,6 +41,8 @@ const Class = ({ task, index }: ITaskProps) => {
           // isDragDisabled={isDragDisabled}
         >
           {task.content}
+          <br />
+          {task.classType}
         </div>
       )}
     </Draggable>

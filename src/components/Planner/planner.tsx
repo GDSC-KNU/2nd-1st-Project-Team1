@@ -16,8 +16,6 @@ const Planner = ({ data }: { data: IData }) => {
   const [temp, setTemp] = useState<IData>(data);
 
   useEffect(() => {
-    // console.log("data", data);
-    // console.log("temp", temp);
     if (data) setTemp(data);
   }, [data]);
   // const [semesterList, setSemesterList] = useState<SemesterProps[]>([]);
@@ -32,11 +30,7 @@ const Planner = ({ data }: { data: IData }) => {
     <div className={PlannerContainer}>
       <>
         <Summary />
-        <Droppable
-          droppableId="all-columns"
-          direction="horizontal"
-          type="column"
-        >
+        <Droppable droppableId="all-columns" type="column">
           {provided => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
               {temp &&
@@ -46,7 +40,6 @@ const Planner = ({ data }: { data: IData }) => {
                   const tasks = column.taskIds.map(
                     (taskId: string | number) => temp.tasks[taskId],
                   );
-                  console.log("column:", column);
                   return (
                     <Semester
                       column={column}

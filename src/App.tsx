@@ -7,7 +7,13 @@ import { useCallback, useState } from "react";
 
 export interface IData {
   tasks: {
-    [key: string]: { id: string; content: string };
+    [key: string]: {
+      id: string;
+      content: string;
+      className?: string;
+      classType?: string;
+      classCredit?: string;
+    };
   };
   columns: {
     [key: string]: {
@@ -21,14 +27,54 @@ export interface IData {
   columnOrder: string[];
 }
 
+//   { id: "crtl1", className: "test", classCredit: "3", classType: "전공" },
+//   { id: "crtl2", className: "test", classCredit: "3", classType: "교양" },
+//   { id: "crtl3", className: "test", classCredit: "3", classType: "전공필수" },
+//   { id: "crtl4", className: "test", classCredit: "3", classType: "기본소양" },
 const initialData = {
   tasks: {
-    "task-1": { id: "task-1", content: "Take out the garbage" },
-    "task-2": { id: "task-2", content: "Watch my favorite show" },
-    "task-3": { id: "task-3", content: "Charge my phone" },
-    "task-4": { id: "task-4", content: "Cook dinner" },
-    "task-5": { id: "task-5", content: "Cook dinner" },
-    "task-6": { id: "task-6", content: "Cook dinner" },
+    "task-1": {
+      id: "task-1",
+      content: "test1",
+      className: "test1",
+      classCredit: "3",
+      classType: "전공",
+    },
+    "task-2": {
+      id: "task-2",
+      content: "test2",
+      className: "test2",
+      classCredit: "3",
+      classType: "교양",
+    },
+    "task-3": {
+      id: "task-3",
+      content: "test3",
+      className: "test3",
+      classCredit: "3",
+      classType: "전공필수",
+    },
+    "task-4": {
+      id: "task-4",
+      content: "test4",
+      className: "test4",
+      classCredit: "3",
+      classType: "기본소양",
+    },
+    "task-5": {
+      id: "task-5",
+      content: "test5",
+      className: "test5",
+      classCredit: "3",
+      classType: "기본소양",
+    },
+    "task-6": {
+      id: "task-6",
+      content: "test6",
+      className: "test6",
+      classCredit: "3",
+      classType: "기본소양",
+    },
   },
   columns: {
     "column-1": {
@@ -43,13 +89,13 @@ const initialData = {
       title: "In progress",
       taskIds: ["task-5"],
       grade: 1,
-      semester: 1,
+      semester: 2,
     },
     "column-3": {
       id: "column-3",
       title: "Done",
       taskIds: ["task-6"],
-      grade: 1,
+      grade: 2,
       semester: 1,
     },
   },
@@ -69,9 +115,6 @@ function App() {
 
       const startColumn = data.columns[source.droppableId];
       const finishColumn = data.columns[destination.droppableId];
-      console.log("start", startColumn, "finish", finishColumn);
-      console.log("source droppadbleId", source.droppableId);
-      console.log("destination droppableId", destination.droppableId);
       if (startColumn === finishColumn) {
         const newTaskIds = Array.from(startColumn.taskIds);
         newTaskIds.splice(source.index, 1);
