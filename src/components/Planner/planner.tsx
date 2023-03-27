@@ -30,24 +30,24 @@ const Planner = ({ data }: { data: IData }) => {
     <div className={PlannerContainer}>
       <>
         <Summary />
-        <Droppable droppableId="all-columns" type="column">
+        <Droppable droppableId="all-semesterBlocks" type="semesterBlock">
           {provided => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
               {temp &&
-                temp.columnOrder &&
-                temp.columnOrder.map((columnId, index) => {
-                  const column = temp.columns[columnId];
-                  const tasks = column.taskIds.map(
-                    (taskId: string | number) => temp.tasks[taskId],
+                temp.semesterBlockOrder &&
+                temp.semesterBlockOrder.map((semesterId, index) => {
+                  const semesterBlock = temp.semesterBlocks[semesterId];
+                  const courses = semesterBlock.courseIds.map(
+                    (taskId: string | number) => temp.courses[taskId],
                   );
                   return (
                     <Semester
-                      column={column}
-                      tasks={tasks}
-                      key={column.id}
+                      semesterBlock={semesterBlock}
+                      courses={courses}
+                      key={semesterBlock.id}
                       index={index}
-                      grade={column.grade}
-                      semester={column.semester}
+                      grade={semesterBlock.grade}
+                      semester={semesterBlock.semester}
                     />
                   );
                 })}

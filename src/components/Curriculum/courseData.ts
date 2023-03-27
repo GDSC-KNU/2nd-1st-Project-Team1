@@ -317,8 +317,8 @@ export const courseData: CourseType[] = [
     year: "3학년",
     semester: "2학기",
     credit: "4학점",
-    required: '필수',
-    design: '설계',
+    required: "필수",
+    design: "설계",
   },
   {
     name: "모바일앱프로그래밍1",
@@ -359,8 +359,7 @@ export const courseData: CourseType[] = [
     credit: "4학점",
     required: null,
     design: null,
-  }
-  ,
+  },
   {
     name: "대규모병렬컴퓨팅",
     code: "ITEC0418",

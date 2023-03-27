@@ -25,16 +25,18 @@ interface ITaskProps {
   index: number;
 }
 const Class = ({ task, index }: ITaskProps) => {
-  const isDragDisabled = task.id === "task-1";
+  // const isDragDisabled = task.id === "task-1";
   return (
     <Draggable
+      key={task.id}
       draggableId={task.id}
       index={index}
-      isDragDisabled={isDragDisabled}
+      // isDragDisabled={isDragDisabled}
     >
       {provided => (
         <div
           className={ClassBox}
+          key={task.id}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
@@ -43,45 +45,13 @@ const Class = ({ task, index }: ITaskProps) => {
           {task.content}
           <br />
           {task.classType}
+          <button className={deleteClass} onClick={() => console.log(1)}>
+            x
+          </button>
         </div>
       )}
     </Draggable>
   );
-  // return (
-  //   <Draggable draggableId={id} index={index}>
-  //     {provided => (
-  //       <div
-  //         className={ClassBox}
-  //         {...provided.dragHandleProps}
-  //         {...provided.dragHandleProps}
-  //         ref={provided.innerRef}
-  //         // isDragging={snapshot.isDragging}
-  //         //isDragDisabled={isDragDisabled}
-  //       >
-  //         {active ? (
-  //           <>
-  //             <h3>{className}</h3>
-  //             <h5>
-  //               {classType} {classCredit}
-  //             </h5>
-  //             <button className={deleteClass} onClick={() => console.log(1)}>
-  //               x
-  //             </button>
-  //           </>
-  //         ) : (
-  //           <>
-  //             <button
-  //               className={plusClass}
-  //               onClick={() => console.log("plusClass")}
-  //             >
-  //               +
-  //             </button>
-  //           </>
-  //         )}
-  //       </div>
-  //     )}
-  //   </Draggable>
-  // );
 };
 
 export default Class;

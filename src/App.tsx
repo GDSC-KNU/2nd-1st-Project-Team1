@@ -4,9 +4,10 @@ import Curriculum from "./components/Curriculum/curriculum";
 import Planner from "./components/Planner/planner";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { useCallback, useState } from "react";
+import { courseData } from "./components/Curriculum/courseData";
 
 export interface IData {
-  tasks: {
+  courses: {
     [key: string]: {
       id: string;
       content: string;
@@ -15,16 +16,16 @@ export interface IData {
       classCredit?: string;
     };
   };
-  columns: {
+  semesterBlocks: {
     [key: string]: {
       id: string;
       title: string;
-      taskIds: string[];
+      courseIds: string[];
       semester: number;
       grade: number;
     };
   };
-  columnOrder: string[];
+  semesterBlockOrder: string[];
 }
 
 //   { id: "crtl1", className: "test", classCredit: "3", classType: "전공" },
@@ -32,77 +33,97 @@ export interface IData {
 //   { id: "crtl3", className: "test", classCredit: "3", classType: "전공필수" },
 //   { id: "crtl4", className: "test", classCredit: "3", classType: "기본소양" },
 const initialData = {
-  tasks: {
-    "task-1": {
-      id: "task-1",
+  courses: {
+    "course-1": {
+      id: "course-1",
       content: "test1",
       className: "test1",
       classCredit: "3",
       classType: "전공",
     },
-    "task-2": {
-      id: "task-2",
+    test: {
+      id: "CLTR0045",
+      content: "test1",
+      className: "test1",
+      classCredit: "3",
+      classType: "전공",
+    },
+    "course-2": {
+      id: "course-2",
       content: "test2",
       className: "test2",
       classCredit: "3",
       classType: "교양",
     },
-    "task-3": {
-      id: "task-3",
+    "course-3": {
+      id: "course-3",
       content: "test3",
       className: "test3",
       classCredit: "3",
       classType: "전공필수",
     },
-    "task-4": {
-      id: "task-4",
+    "course-4": {
+      id: "course-4",
       content: "test4",
       className: "test4",
       classCredit: "3",
       classType: "기본소양",
     },
-    "task-5": {
-      id: "task-5",
+    "course-5": {
+      id: "course-5",
       content: "test5",
       className: "test5",
       classCredit: "3",
       classType: "기본소양",
     },
-    "task-6": {
-      id: "task-6",
+    "course-6": {
+      id: "course-6",
       content: "test6",
       className: "test6",
       classCredit: "3",
       classType: "기본소양",
     },
   },
-  columns: {
-    "column-1": {
-      id: "column-1",
+  semesterBlocks: {
+    "semesterBlock-0": {
+      id: "semesterBlock-0",
+      title: "test",
+      courseIds: ["test"],
+      grade: 0,
+      semester: 0,
+    },
+    "semesterBlock-1": {
+      id: "semesterBlock-1",
       title: "To do",
-      taskIds: ["task-1", "task-2", "task-3", "task-4"],
+      courseIds: ["course-1", "course-2", "course-3", "course-4"],
       grade: 1,
       semester: 1,
     },
-    "column-2": {
-      id: "column-2",
+    "semesterBlock-2": {
+      id: "semesterBlock-2",
       title: "In progress",
-      taskIds: ["task-5"],
+      courseIds: ["course-5"],
       grade: 1,
       semester: 2,
     },
-    "column-3": {
-      id: "column-3",
+    "semesterBlock-3": {
+      id: "semesterBlock-3",
       title: "Done",
-      taskIds: ["task-6"],
+      courseIds: ["course-6"],
       grade: 2,
       semester: 1,
     },
   },
-  columnOrder: ["column-1", "column-2", "column-3"],
+  semesterBlockOrder: [
+    "semesterBlock-0",
+    "semesterBlock-1",
+    "semesterBlock-2",
+    "semesterBlock-3",
+  ],
 };
 function App() {
   const [data, setData] = useState<IData>(initialData);
+  console.log(data);
   const onDragEnd = useCallback(
     (result: DropResult) => {
       const { destination, source, draggableId } = result;
@@ -113,48 +134,48 @@ function App() {
       )
         return;
 
-      const startColumn = data.columns[source.droppableId];
-      const finishColumn = data.columns[destination.droppableId];
-      if (startColumn === finishColumn) {
-        const newTaskIds = Array.from(startColumn.taskIds);
-        newTaskIds.splice(source.index, 1);
-        newTaskIds.splice(destination.index, 0, draggableId);
+      const startsemesterBlock = data.semesterBlocks[source.droppableId];
+      const finishsemesterBlock = data.semesterBlocks[destination.droppableId];
+      if (startsemesterBlock === finishsemesterBlock) {
+        const newcourseIds = Array.from(startsemesterBlock.courseIds);
+        newcourseIds.splice(source.index, 1);
+        newcourseIds.splice(destination.index, 0, draggableId);
 
-        const newColumn = {
-          ...startColumn,
-          taskIds: newTaskIds,
+        const newsemesterBlock = {
+          ...startsemesterBlock,
+          courseIds: newcourseIds,
         };
 
         const newData = {
           ...data,
-          columns: {
-            ...data.columns,
-            [newColumn.id]: newColumn,
+          semesterBlocks: {
+            ...data.semesterBlocks,
+            [newsemesterBlock.id]: newsemesterBlock,
           },
         };
 
         setData(newData);
       } else {
-        const startTaskIds = Array.from(startColumn.taskIds);
-        startTaskIds.splice(source.index, 1);
-        const newStartColumn = {
-          ...startColumn,
-          taskIds: startTaskIds,
+        const startcourseIds = Array.from(startsemesterBlock.courseIds);
+        startcourseIds.splice(source.index, 1);
+        const newStartsemesterBlock = {
+          ...startsemesterBlock,
+          courseIds: startcourseIds,
         };
 
-        const finishTaskIds = Array.from(finishColumn.taskIds);
-        finishTaskIds.splice(destination.index, 0, draggableId);
-        const newFinishColumn = {
-          ...finishColumn,
-          taskIds: finishTaskIds,
+        const finishcourseIds = Array.from(finishsemesterBlock.courseIds);
+        finishcourseIds.splice(destination.index, 0, draggableId);
+        const newFinishsemesterBlock = {
+          ...finishsemesterBlock,
+          courseIds: finishcourseIds,
         };
 
         const newData = {
           ...data,
-          columns: {
-            ...data.columns,
-            [newStartColumn.id]: newStartColumn,
-            [newFinishColumn.id]: newFinishColumn,
+          semesterBlocks: {
+            ...data.semesterBlocks,
+            [newStartsemesterBlock.id]: newStartsemesterBlock,
+            [newFinishsemesterBlock.id]: newFinishsemesterBlock,
           },
         };
 

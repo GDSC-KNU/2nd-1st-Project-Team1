@@ -38,8 +38,8 @@ interface ITaskList {
 }
 
 interface IColumnProps {
-  column: { id: string; title: string; taskIds: string[] };
-  tasks?: {
+  semesterBlock: { id: string; title: string; courseIds: string[] };
+  courses?: {
     id: string;
     content: string;
   }[];
@@ -57,8 +57,8 @@ const Semester = ({
   semester,
   grade,
   onClick,
-  column,
-  tasks,
+  semesterBlock,
+  courses,
   index,
 }: IColumnProps) => {
   // const [classList, setClassList] = useState<ClassProps[]>([
@@ -78,7 +78,7 @@ const Semester = ({
     return <AddSemesterModal />;
   };
   return (
-    // <Draggable draggableId={column.id} index={index}>
+    // <Draggable draggableId=  semesterBlock.id} index={index}>
     //   {provided => (
     <>
       <div
@@ -98,14 +98,13 @@ const Semester = ({
         </div>
 
         <div className={SemesterMain}>
-          {column && active ? (
-            // <Droppable droppableId={`${grade}-${semester}`}>
-            <Droppable droppableId={column.id}>
+          {semesterBlock && active ? (
+            <Droppable droppableId={semesterBlock.id}>
               {provided => (
                 <ul {...provided.droppableProps} ref={provided.innerRef}>
                   <>
-                    {tasks &&
-                      tasks.map((task, idx) => (
+                    {courses &&
+                      courses.map((task, idx) => (
                         <Class key={task.id} task={task} index={idx} />
                       ))}
                     {provided.placeholder}
@@ -120,7 +119,7 @@ const Semester = ({
                   >
                     <h4 className={SemesterCredit}>9학점</h4>
                     <>
-                      {tasks.map((task, idx) => {
+                      {courses.map((task, idx) => {
                         return (
                             {provided => (
                               <li
