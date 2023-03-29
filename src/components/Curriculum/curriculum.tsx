@@ -63,7 +63,7 @@ const Curriculum = () => {
       />
 
       <div className={resultsContainer}>
-        <Droppable droppableId="column-0">
+        <Droppable droppableId="semesterBlock-0">
           {provided => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
               {result.map((result, index) => {

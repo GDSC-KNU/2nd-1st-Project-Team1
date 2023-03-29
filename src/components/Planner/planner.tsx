@@ -54,13 +54,6 @@ const Planner = ({ data }: { data: IData }) => {
               {provided.placeholder}
             </div>
           )}
-          {/* <Semester semester={1} grade={1} />
-          {semesterList &&
-            semesterList.map(semester => {
-              // <Semester semester={semester.semester} grade={semester.grade} />;
-              <Semester semester={semester.semester} grade={semester.grade} />;
-            })}
-          <Semester active={false} onClick={() => addSemester(testSemester)} /> */}
         </Droppable>
       </>
     </div>

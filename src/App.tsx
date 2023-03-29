@@ -41,7 +41,7 @@ const initialData = {
       classCredit: "3",
       classType: "전공",
     },
-    test: {
+    CLTR0045: {
       id: "CLTR0045",
       content: "test1",
       className: "test1",
@@ -88,7 +88,7 @@ const initialData = {
     "semesterBlock-0": {
       id: "semesterBlock-0",
       title: "test",
-      courseIds: ["test"],
+      courseIds: [],
       grade: 0,
       semester: 0,
     },
@@ -123,7 +123,6 @@ const initialData = {
 };
 function App() {
   const [data, setData] = useState<IData>(initialData);
-  console.log(data);
   const onDragEnd = useCallback(
     (result: DropResult) => {
       const { destination, source, draggableId } = result;
@@ -136,6 +135,7 @@ function App() {
 
       const startsemesterBlock = data.semesterBlocks[source.droppableId];
       const finishsemesterBlock = data.semesterBlocks[destination.droppableId];
+      console.log("result", result);
       if (startsemesterBlock === finishsemesterBlock) {
         const newcourseIds = Array.from(startsemesterBlock.courseIds);
         newcourseIds.splice(source.index, 1);
@@ -154,6 +154,29 @@ function App() {
           },
         };
 
+        setData(newData);
+      } else if (source.droppableId == "semesterBlock-0") {
+        console.log("curriculum");
+        console.log(startsemesterBlock);
+        console.log(finishsemesterBlock);
+
+        const finishcourseIds = Array.from(finishsemesterBlock.courseIds);
+        console.log("destination.index", destination.index);
+        finishcourseIds.splice(destination.index, 0, draggableId);
+        console.log("finishcourseIds", finishcourseIds);
+        console.log("draggableId", draggableId);
+        const newFinishsemesterBlock = {
+          ...finishsemesterBlock,
+          courseIds: finishcourseIds,
+        };
+        console.log("finishsemesterBlock", newFinishsemesterBlock.courseIds);
+        const newData = {
+          ...data,
+          semesterBlocks: {
+            ...data.semesterBlocks,
+            [newFinishsemesterBlock.id]: newFinishsemesterBlock,
+          },
+        };
         setData(newData);
       } else {
         const startcourseIds = Array.from(startsemesterBlock.courseIds);

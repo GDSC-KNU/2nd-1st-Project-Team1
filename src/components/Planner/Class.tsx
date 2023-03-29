@@ -14,7 +14,7 @@ interface ClassProps {
 }
 
 interface ITaskProps {
-  task: {
+  course: {
     id: string;
     content: string;
     className?: string;
@@ -24,27 +24,27 @@ interface ITaskProps {
 
   index: number;
 }
-const Class = ({ task, index }: ITaskProps) => {
-  // const isDragDisabled = task.id === "task-1";
+const Class = ({ course, index }: ITaskProps) => {
+  // const isDragDisabled = course.id === "course-1";
   return (
     <Draggable
-      key={task.id}
-      draggableId={task.id}
+      key={course.id}
+      draggableId={course.id}
       index={index}
       // isDragDisabled={isDragDisabled}
     >
       {provided => (
         <div
           className={ClassBox}
-          key={task.id}
+          key={course.id}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
           // isDragDisabled={isDragDisabled}
         >
-          {task.content}
+          {course.content}
           <br />
-          {task.classType}
+          {course.classType}
           <button className={deleteClass} onClick={() => console.log(1)}>
             x
           </button>

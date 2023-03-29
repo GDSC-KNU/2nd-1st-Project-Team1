@@ -61,6 +61,7 @@ const Semester = ({
   courses,
   index,
 }: IColumnProps) => {
+  console.log(courses);
   // const [classList, setClassList] = useState<ClassProps[]>([
   //   { id: "crtl1", className: "test", classCredit: "3", classType: "전공" },
   //   { id: "crtl2", className: "test", classCredit: "3", classType: "교양" },
@@ -104,46 +105,13 @@ const Semester = ({
                 <ul {...provided.droppableProps} ref={provided.innerRef}>
                   <>
                     {courses &&
-                      courses.map((task, idx) => (
-                        <Class key={task.id} task={task} index={idx} />
+                      courses.map((course, idx) => (
+                        <Class key={course.id} course={course} index={idx} />
                       ))}
                     {provided.placeholder}
                   </>
                 </ul>
               )}
-              {/* {provided => (
-                  <ul
-                    className={List}
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                  >
-                    <h4 className={SemesterCredit}>9학점</h4>
-                    <>
-                      {courses.map((task, idx) => {
-                        return (
-                            {provided => (
-                              <li
-                                className={ListBox}
-                                ref={provided.innerRef}
-                                {...provided.dragHandleProps}
-                                {...provided.draggableProps}
-                              >
-                                <Class
-                                  // className={item.className}
-                                  // classCredit={item.classCredit}
-                                  // classType={item.classType}
-                                  key={task.id}
-                                  task={task}
-                                  index={idx}
-                                />
-                              </li>
-                            )}
-                        );
-                      })}
-                    </>
-                    {provided.placeholder}
-                  </ul>
-                )} */}
             </Droppable>
           ) : (
             <>
