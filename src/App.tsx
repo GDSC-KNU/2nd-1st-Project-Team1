@@ -123,6 +123,14 @@ const initialData = {
 };
 function App() {
   const [data, setData] = useState<IData>(initialData);
+  // const [newCourse, setNewCourse] = useState();
+  // const newData = {
+  //   ...data,
+  //   courses: {
+  //     ...data.courses,
+  //   },
+  // };
+  // setData(newData);
   const onDragEnd = useCallback(
     (result: DropResult) => {
       const { destination, source, draggableId } = result;

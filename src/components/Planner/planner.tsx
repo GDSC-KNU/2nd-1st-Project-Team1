@@ -51,6 +51,7 @@ const Planner = ({ data }: { data: IData }) => {
                     />
                   );
                 })}
+              <Semester active={false} />
               {provided.placeholder}
             </div>
           )}

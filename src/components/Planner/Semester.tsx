@@ -38,12 +38,12 @@ interface ITaskList {
 }
 
 interface IColumnProps {
-  semesterBlock: { id: string; title: string; courseIds: string[] };
+  semesterBlock?: { id: string; title: string; courseIds: string[] };
   courses?: {
     id: string;
     content: string;
   }[];
-  index: number;
+  index?: number;
   backGroundColor?: string;
   active?: boolean;
   grade?: number;
@@ -61,7 +61,6 @@ const Semester = ({
   courses,
   index,
 }: IColumnProps) => {
-  console.log(courses);
   // const [classList, setClassList] = useState<ClassProps[]>([
   //   { id: "crtl1", className: "test", classCredit: "3", classType: "전공" },
   //   { id: "crtl2", className: "test", classCredit: "3", classType: "교양" },
@@ -70,13 +69,19 @@ const Semester = ({
   // ]);
   // const [open, setOpen] = useState<boolean>();
   const { openModal, open: modalOpen } = useContext(ModalContext);
-  const ModalOpen = () => {
+  const [open, setOpen] = useState("");
+  const ModalOpen = (check: string) => {
+    console.log(check);
     // setOpen(true);
-    openModal();
+
     if (!modalOpen) {
       return <></>;
     }
-    return <AddSemesterModal />;
+    if (check == "add") {
+      openModal();
+      setOpen(check);
+      return <AddSemesterModal />;
+    }
   };
   return (
     // <Draggable draggableId=  semesterBlock.id} index={index}>
@@ -87,7 +92,7 @@ const Semester = ({
         // ref={provided.innerRef}
         // {...provided.draggableProps}
       >
-        {modalOpen && <AddSemesterModal />}
+        {open == "add" && modalOpen && <AddSemesterModal />}
         <div className={SemesterHeader}>
           {active ? (
             <h4 className={SemesterText}>
@@ -115,7 +120,7 @@ const Semester = ({
             </Droppable>
           ) : (
             <>
-              <button className={plusSemester} onClick={() => ModalOpen()}>
+              <button className={plusSemester} onClick={() => ModalOpen("add")}>
                 +
               </button>
             </>
