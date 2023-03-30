@@ -1,16 +1,23 @@
-import { Link, useLocation } from "react-router-dom";
-import { menuWrapper, menuBox, profile, menuLink, underline } from "./MyPageMenu.css";
+import { Link } from "react-router-dom";
+import { menuWrapper, menuBox, profile, menuLink, pageLink, bold } from "./MyPageMenu.css";
+import { useState } from 'react';
 
 const MyPageMenu = () => {
+  const [page, setPage] = useState(true);
+  const onMenuClick = () => {
+    setPage(!page);
+  };
   return (
     <div className={menuWrapper}>
       <div className={profile}>
-        <img src="img/knu_character.png" />
+        <img src="img/knu_character.png" alt="" />
       </div>
-      <ul className={menuBox}>
-        <li className={menuLink}>개인정보</li>
-        <li className={menuLink}>비밀번호 변경</li>
-      </ul>
+      <Link role="link" onClick={onMenuClick} className={page ? `${pageLink} ${bold}` : pageLink} to="/page">
+        개인정보
+      </Link>
+      <Link role="link" onClick={onMenuClick} className={page ? pageLink : `${pageLink} ${bold}`} to="pw-change">
+        비밀번호 변경
+      </Link>
     </div>
   );
 };
