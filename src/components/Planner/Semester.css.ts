@@ -69,3 +69,8 @@ export const SemesterCredit = style({
   backgroundColor: "#f9dda7",
   fontSize: "0.75rem",
 });
+
+export const ulBox = style({
+  width: "80%",
+  marginLeft: "auto",
+});

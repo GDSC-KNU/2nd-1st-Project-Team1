@@ -8,6 +8,7 @@ import {
   SemesterHeader,
   SemesterMain,
   SemesterText,
+  ulBox,
 } from "./Semester.css";
 import { ModalContext } from "../Modal/ModalContext";
 import {
@@ -107,7 +108,11 @@ const Semester = ({
           {semesterBlock && active ? (
             <Droppable droppableId={semesterBlock.id}>
               {provided => (
-                <ul {...provided.droppableProps} ref={provided.innerRef}>
+                <ul
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                  className={ulBox}
+                >
                   <>
                     {courses &&
                       courses.map((course, idx) => (
