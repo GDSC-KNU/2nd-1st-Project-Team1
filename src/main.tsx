@@ -19,7 +19,7 @@ const route = createBrowserRouter(
       <Route path="/" element={<App />} />
       <Route path="/login" element={<Login />} />
       <Route path="/summary" element={<Summary />} />
-      <Route path="/page" element={<Page />} />
+      <Route path="/page/*" element={<Page />} />
       <Route path="*" element={<div>Not Found</div>} />
     </Route>,
   ),
