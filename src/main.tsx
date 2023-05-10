@@ -12,16 +12,18 @@ import Root from "./routes/root/root";
 import Page from "./routes/page/page";
 import Login from "./routes/login/login";
 import Summary from "./routes/summary/summary";
+import SignUp from "./routes/signup/signup";
 
 const route = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route path="/" element={<App />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
       <Route path="/summary" element={<Summary />} />
       <Route path="/page/*" element={<Page />} />
       <Route path="*" element={<div>Not Found</div>} />
-    </Route>,
+    </Route>
   ),
   { basename: "/2nd-1st-Project-Team1/" },
 );
