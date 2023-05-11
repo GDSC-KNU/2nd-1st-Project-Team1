@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AddSemesterModal from "../Modal/AddSemesterModal";
 import Class from "./Class";
 import {
@@ -10,7 +10,13 @@ import {
   SemesterText,
 } from "./Semester.css";
 import { ModalContext } from "../Modal/ModalContext";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DropResult,
+} from "react-beautiful-dnd";
+import { ClassBox, List, ListBox } from "./Class.css";
 interface SemesterProps {
   backGroundColor?: string;
   active?: boolean;
@@ -24,6 +30,25 @@ interface ClassProps {
   classType?: string;
   classCredit?: string;
   active?: boolean;
+  id: string;
+}
+
+interface ITaskList {
+  isDraggingOver: boolean;
+}
+
+interface IColumnProps {
+  semesterBlock?: { id: string; title: string; courseIds: string[] };
+  courses?: {
+    id: string;
+    content: string;
+  }[];
+  index?: number;
+  backGroundColor?: string;
+  active?: boolean;
+  grade?: number;
+  semester?: number;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const Semester = ({
@@ -32,74 +57,79 @@ const Semester = ({
   semester,
   grade,
   onClick,
-  // semesterList,
-  ...props
-}: SemesterProps) => {
-  const [classList, setClassList] = useState<ClassProps[]>([]);
+  semesterBlock,
+  courses,
+  index,
+}: IColumnProps) => {
+  // const [classList, setClassList] = useState<ClassProps[]>([
+  //   { id: "crtl1", className: "test", classCredit: "3", classType: "전공" },
+  //   { id: "crtl2", className: "test", classCredit: "3", classType: "교양" },
+  //   { id: "crtl3", className: "test", classCredit: "3", classType: "전공필수" },
+  //   { id: "crtl4", className: "test", classCredit: "3", classType: "기본소양" },
+  // ]);
   // const [open, setOpen] = useState<boolean>();
   const { openModal, open: modalOpen } = useContext(ModalContext);
-  const ModalOpen = () => {
+  const [open, setOpen] = useState("");
+  const ModalOpen = (check: string) => {
+    console.log(check);
     // setOpen(true);
-    openModal();
+
     if (!modalOpen) {
       return <></>;
     }
-    return <AddSemesterModal />;
-  };
-  const addItem = (item: ClassProps) => {
-    setClassList([...classList, item]);
-  };
-  // const testSemester: SemesterProps = {
-  //   grade: 4,
-  //   semester: 4,
-  //   onClick
-  // };
-
-  const handleChange = (result: any) => {
-    if (!result.destination) return;
-    const items = [...classList];
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    setClassList(items);
+    if (check == "add") {
+      openModal();
+      setOpen(check);
+      return <AddSemesterModal />;
+    }
   };
   return (
-    <div className={SemesterBox}>
-      {modalOpen && <AddSemesterModal />}
-      <div className={SemesterHeader}>
-        {active ? (
-          <h4 className={SemesterText}>
-            {grade}학년 {semester}학기
-          </h4>
-        ) : (
-          <h4 className={SemesterText}></h4>
-        )}
-      </div>
+    // <Draggable draggableId=  semesterBlock.id} index={index}>
+    //   {provided => (
+    <>
+      <div
+        className={SemesterBox}
+        // ref={provided.innerRef}
+        // {...provided.draggableProps}
+      >
+        {open == "add" && modalOpen && <AddSemesterModal />}
+        <div className={SemesterHeader}>
+          {active ? (
+            <h4 className={SemesterText}>
+              {grade}학년 {semester}학기
+            </h4>
+          ) : (
+            <h4 className={SemesterText}></h4>
+          )}
+        </div>
 
-      <div className={SemesterMain}>
-        {active ? (
-          <>
-            <h4 className={SemesterCredit}>9학점</h4>
-            <Class className="수학 1" classCredit="3" classType="전공기반" />
-            <Class className="수학 1" classCredit="3" classType="전공기반" />
-            {classList &&
-              classList.map(item => {
-                <Class
-                  className={item.className}
-                  classCredit={item.classCredit}
-                  classType={item.classType}
-                />;
-              })}
-            {/* <Class active={false} /> */}
-          </>
-        ) : (
-          <>
-            <button className={plusSemester} onClick={() => ModalOpen()}>
-              +
-            </button>
-          </>
-        )}
+        <div className={SemesterMain}>
+          {semesterBlock && active ? (
+            <Droppable droppableId={semesterBlock.id}>
+              {provided => (
+                <ul {...provided.droppableProps} ref={provided.innerRef}>
+                  <>
+                    {courses &&
+                      courses.map((course, idx) => (
+                        <Class key={course.id} course={course} index={idx} />
+                      ))}
+                    {provided.placeholder}
+                  </>
+                </ul>
+              )}
+            </Droppable>
+          ) : (
+            <>
+              <button className={plusSemester} onClick={() => ModalOpen("add")}>
+                +
+              </button>
+            </>
+          )}
+        </div>
       </div>
-    </div>
+      {/* )} */}
+      {/* // </Draggable> */}
+    </>
   );
 };
 

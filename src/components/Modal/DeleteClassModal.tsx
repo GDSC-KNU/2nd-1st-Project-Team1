@@ -1,7 +1,7 @@
 import BackgroundModal from "./BackgroundModal";
 import { AddSemesterModalBox } from "./Modal.css";
 
-const AddSemesterModal = ({ openModal, setOpenModal }: any) => {
+const DeleteClassModal = () => {
   return (
     <BackgroundModal width="440" p="1rem">
       <div className={AddSemesterModalBox}>
@@ -13,4 +13,4 @@ const AddSemesterModal = ({ openModal, setOpenModal }: any) => {
   );
 };
 
-export default AddSemesterModal;
+export default DeleteClassModal;
