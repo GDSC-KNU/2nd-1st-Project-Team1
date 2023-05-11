@@ -9,7 +9,7 @@ import { LoginProps } from "./auth";
 //     return await axios.post(`${baseURL}/user/auth/login`, { studentID, password });
 //   },
 
-const baseURL = "http://canigraduate.duckdns.org" || "http://localhost:3000";
+const baseURL = "https://canigraduate.duckdns.org" || "http://localhost:3000";
 
 interface semesterProps {
   grade: string;
