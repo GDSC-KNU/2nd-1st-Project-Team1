@@ -59,9 +59,9 @@ const Class = ({ course, index }: ITaskProps) => {
             ref={provided.innerRef}
             // isDragDisabled={isDragDisabled}
           >
-            {course.content}
+            <h1>{course.content}</h1>
             <br />
-            {course.classType}
+            <h4>{course.classType}</h4>
             <button className={deleteClass} onClick={() => ModalOpen("delete")}>
               x
             </button>
