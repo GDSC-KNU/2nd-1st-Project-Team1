@@ -1,5 +1,8 @@
 import axios from "axios";
-import { CourseType } from "../components/Curriculum/courseData";
+import {
+  CourseQueryType,
+  CourseType,
+} from "../components/Curriculum/courseData";
 import { LoginProps } from "./auth";
 import clientApi from "./axios";
 
@@ -7,13 +10,35 @@ import clientApi from "./axios";
 //     return await axios.post(`${baseURL}/user/auth/login`, { studentID, password });
 //   },
 
-// const baseURL = process.env.SERVER_URL || "http://localhost:3000";
+const baseURL = "https://canigraduate.duckdns.org" || "http://localhost:3000";
 
 interface semesterProps {
   grade: string;
   semester: string;
   courseList: CourseType[];
 }
+
+const parseCourseQuery = (courseQuery: CourseQueryType) => {
+  let query = "";
+  const { name, code, type, grade, semester, credit, required, design } =
+    courseQuery;
+  query += `${name ? "&name=" + name : ""}`;
+  query += `${code ? "&code=" + code : ""}`;
+  query += `${type !== "-" ? "&type=" + type : ""}`;
+  query += `${grade !== "-" ? "&grade=" + grade : ""}`;
+  query += `${semester !== "-" ? "&semester=" + semester : ""}`;
+  query += `${credit !== "-" ? "&credit=" + credit : ""}`;
+  query += `${
+    required !== "-"
+      ? "&required=" + (required === "필수" ? "true " : "false")
+      : ""
+  }`;
+  query += `${
+    design !== "-" ? "&design=" + (design === "설계" ? "true" : "false") : ""
+  }`;
+  query += "&lectureYear=2022";
+  return query;
+};
 
 const homeApi = {
   // getDashboard: async ({ studentID, password }: LoginProps) => {
@@ -27,9 +52,9 @@ const homeApi = {
   // },
 
   // 강의 조회
-  getCourses: async ({}: any) => {
-    return await clientApi.get("/lectures?lectureYear=2022");
-  },
+  // getCourses: async ({}: any) => {
+  //   return await clientApi.get("/lectures?lectureYear=2022");
+  // },
 
   //유저에 해당하는 강의 조회
   getLectureForUser: async ({ id }: any) => {
@@ -39,6 +64,11 @@ const homeApi = {
   //유저 강의 삭제
   deleteLecture: async ({ id }: any) => {
     return await clientApi.post(`/userLecture/delete/${id}`);
+  },
+  getCourses: async ({ courseQuery }: { courseQuery: CourseQueryType }) => {
+    const courseQueryURL = parseCourseQuery(courseQuery);
+
+    return await axios.get(`${baseURL}/api/lectures?${courseQueryURL}`);
   },
 
   //유저 강의 전체 삭제

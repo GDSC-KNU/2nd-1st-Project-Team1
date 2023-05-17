@@ -1,83 +1,40 @@
-import { FormEventHandler, useState } from "react";
-import { courseData, CourseType } from "./courseData";
+import { FormEventHandler, useEffect, useState } from "react";
+import { CourseQueryType, CourseType } from "./courseData";
 import * as style from "./curriculum.css";
-
-const fetchedCourses = courseData;
-
-const lectureCodeRegex = /(^[a-zA-Z]{4})([0-9]{3,4}$)/;
-
-console.log(lectureCodeRegex.test("CLTR0005"));
-
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+import useGetCourses from "../../hooks/useGetCourse";
 
 const Curriculum = () => {
-  const [query, setQuery] = useState<CourseType>({
+  const [query, setQuery] = useState<CourseQueryType>({
     name: "",
     code: "",
-    type: "전체",
-    credit: "전체",
-    year: "전학년",
-    semester: "전학기",
-    required: "전체",
-    design: "전체",
+    type: "-",
+    credit: "-",
+    grade: "-",
+    semester: "-",
+    required: "-",
+    design: "-",
+    lectureYear: 2022,
   });
-  const [result, setResult] = useState<CourseType[]>(fetchedCourses);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const fetchCourses = async () => {
-    await sleep(1000);
+  const [isClicked, setIsClicked] = useState(false);
 
-    return fetchedCourses.filter(course => {
-      let checkNameOrCode =
-        course.name.includes(query.name) || course.code.includes(query.code);
-      if (query.name === "") checkNameOrCode = true;
+  const { data, isLoading } = useGetCourses(query, isClicked);
 
-      let checkType = course.type.includes(query.type);
-      if (query.type === "전체") checkType = true;
+  useEffect(() => {
+    setIsClicked(false);
+  }, [query]);
 
-      let checkCredit = course.credit.includes(query.credit);
-      if (query.credit === "전체") checkCredit = true;
-
-      let checkYear = course.year.includes(query.year);
-      if (query.year === "전학년") checkYear = true;
-
-      let checkSemester = course.semester.includes(query.semester);
-      if (query.semester === "전학기") checkSemester = true;
-
-      let checkRequired = course.required.includes(query.required);
-      if (query.required === "전체") checkRequired = true;
-
-      let checkDesign = course.design.includes(query.design);
-      if (query.design === "전체") checkDesign = true;
-
-      return (
-        checkNameOrCode &&
-        checkType &&
-        checkCredit &&
-        checkYear &&
-        checkSemester &&
-        checkRequired &&
-        checkDesign
-      );
-    });
-  };
-
-  const getCourses: FormEventHandler<HTMLFormElement> = async e => {
+  const getCourses: FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault();
-
-    setIsLoading(true);
-
-    const courses = await fetchCourses();
-    setIsLoading(false);
-
-    setResult(courses);
+    setIsClicked(true);
   };
 
   const Results = () => {
     if (isLoading) return <div className={style.loading}>🌼</div>;
+    if (!data) return <div>No Data Found</div>;
     return (
       <>
-        {result.map(result => {
+        {data.data.map((result: CourseType) => {
           return (
             <div className={style.resultWrapper} key={result.code}>
               <h3 className={style.resultTitle}>{result.name}</h3>
@@ -85,7 +42,7 @@ const Curriculum = () => {
                 <span>{result.type} </span>
                 <span>{result.credit} </span>
                 <span>{result.code} </span>
-                <span>{result.year} </span>
+                <span>{result.grade} </span>
                 <span>{result.semester} </span>
                 {result.required && (
                   <span className={style.resultDetailsRequired}>
@@ -119,25 +76,26 @@ const Curriculum = () => {
         />
         <div className={style.searchFilterWrapper}>
           <div className={style.searchFilter}>
-            <label htmlFor="year" className={style.searchFilterTitle}>
+            <label htmlFor="grade" className={style.searchFilterTitle}>
               학년
             </label>
             <select
-              id="year"
+              id="grade"
               className={style.searchFilterInput}
-              defaultValue={query.year}
+              defaultValue={query.grade}
               onChange={e =>
                 setQuery({
                   ...query,
-                  year: e.target.value as typeof query.year,
+                  grade: e.target.value as typeof query.grade,
                 })
               }
             >
-              <option value="전학년">전학년</option>
-              <option value="1학년">1학년</option>
-              <option value="2학년">2학년</option>
-              <option value="3학년">3학년</option>
-              <option value="4학년">4학년</option>
+              <option value="-"> - </option>
+              <option value="ALL">전학년</option>
+              <option value="FIRST">1학년</option>
+              <option value="SECOND">2학년</option>
+              <option value="THIRD">3학년</option>
+              <option value="FOURTH">4학년</option>
             </select>
           </div>
           <div className={style.searchFilter}>
@@ -155,9 +113,12 @@ const Curriculum = () => {
                 })
               }
             >
-              <option value="전학기">전학기</option>
-              <option value="1학기">1학기</option>
-              <option value="2학기">2학기</option>
+              <option value="-">-</option>
+              <option value="ALL">전학기</option>
+              <option value="FIRST">1학기</option>
+              <option value="SECOND">2학기</option>
+              <option value="SUMMER">여름계절</option>
+              <option value="WINTER">겨울계절</option>
             </select>
           </div>
           <div className={style.searchFilter}>
@@ -175,34 +136,14 @@ const Curriculum = () => {
                 })
               }
             >
-              <option value="전체">전체</option>
-              <option value="전공">전공</option>
-              <option value="교양">교양</option>
-              <option value="일반선택">일반선택</option>
-              <option value="교직">교직</option>
-            </select>
-          </div>
-          <div className={style.searchFilter}>
-            <label htmlFor="type" className={style.searchFilterTitle}>
-              구분
-            </label>
-            <select
-              id="type"
-              className={style.searchFilterInput}
-              defaultValue={query.type}
-              onChange={e =>
-                setQuery({
-                  ...query,
-                  type: e.target.value as typeof query.type,
-                })
-              }
-            >
-              <option value="전체">전체</option>
-              <option value="공학전공">공학전공</option>
-              <option value="전공기반">전공기반</option>
-              <option value="기본소양">기본소양</option>
-              <option value="일반선택">일반선택</option>
-              <option value="교직">교직</option>
+              <option value="-">-</option>
+              <option value="BASIC_KNOWLEDGE">기본소양</option>
+              <option value="MAJOR_BASE">전공기반</option>
+              <option value="ENGINEERING_MAJOR">공학전공</option>
+              <option value="TEACHER">교직</option>
+              <option value="LIBERAL">교양</option>
+              <option value="MAJOR">전공</option>
+              <option value="NORMAL">일반선택</option>
             </select>
           </div>
           <div className={style.searchFilter}>
@@ -220,13 +161,13 @@ const Curriculum = () => {
                 })
               }
             >
-              <option value="전체">전체</option>
-              <option value="1학점">1학점</option>
-              <option value="2학점">2학점</option>
-              <option value="3학점">3학점</option>
-              <option value="4학점">4학점</option>
-              <option value="5학점">5학점</option>
-              <option value="6학점">6학점</option>
+              <option value="-">-</option>
+              <option value="ONE">1학점</option>
+              <option value="TWO">2학점</option>
+              <option value="THREE">3학점</option>
+              <option value="FOUR">4학점</option>
+              <option value="FIVE">5학점</option>
+              <option value="SIX">6학점</option>
             </select>
           </div>
           <div className={style.searchFilter}>
@@ -244,7 +185,7 @@ const Curriculum = () => {
                 })
               }
             >
-              <option value="전체">전체</option>
+              <option value="-">-</option>
               <option value="필수">필수</option>
               <option value="선택">선택</option>
             </select>
@@ -264,7 +205,7 @@ const Curriculum = () => {
                 })
               }
             >
-              <option value="전체">전체</option>
+              <option value="-">-</option>
               <option value="설계">설계</option>
               <option value="비설계">비설계</option>
             </select>

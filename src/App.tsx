@@ -4,7 +4,6 @@ import Curriculum from "./components/Curriculum/curriculum";
 import Planner from "./components/Planner/planner";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { useCallback, useState } from "react";
-import { courseData } from "./components/Curriculum/courseData";
 
 export interface IData {
   courses: {
