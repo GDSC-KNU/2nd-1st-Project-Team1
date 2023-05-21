@@ -13,6 +13,8 @@ import Page from "./routes/page/page";
 import Login from "./routes/login/login";
 import Summary from "./routes/summary/summary";
 import SignUp from "./routes/signup/signup";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 
 const route = createBrowserRouter(
   createRoutesFromElements(
@@ -28,8 +30,12 @@ const route = createBrowserRouter(
   { basename: "/2nd-1st-Project-Team1/" },
 );
 
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <RouterProvider router={route} />
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <RouterProvider router={route} />,
+  </QueryClientProvider>,
+  // </React.StrictMode>,
 );

@@ -29,6 +29,7 @@ export const SemesterMain = style({
   position: "relative",
   width: "100%",
   display: "flex",
+  flexDirection: "column",
   border: "1px solid black",
   borderRadius: "0 0.3rem 0.3rem 0.3rem",
   boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)",
@@ -67,4 +68,9 @@ export const SemesterCredit = style({
   right: "1rem",
   backgroundColor: "#f9dda7",
   fontSize: "0.75rem",
+});
+
+export const ulBox = style({
+  width: "80%",
+  marginLeft: "auto",
 });
