@@ -1,7 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
 export const signupContainer = style({
-    border: "3px solid red",
+    // border: "3px solid red",
     textAlign: "center",
 });
 
@@ -13,7 +13,7 @@ export const capImage = style({
 
 export const input = style({
     display: "block",
-    marginBlock: "1rem",
+    marginBlock: "1.5rem",
     marginLeft: "auto",
     marginRight: "auto",
     width: "50%",
@@ -28,29 +28,19 @@ export const input = style({
 
 export const majorSelect = style({
     width: "50%",
-    height: "40px",
+    // height: "40px",
     border: "1px solid #D9D9D9",
-    borderRadius: "4px",
+    borderRadius: "0.5rem",
     // marginTop: "0.2rem",
     paddingLeft: "1rem",
     fontSize: "1.1rem",
     backgroundColor: "#D9D9D980",
     display: "block",
-    // marginBlock: "1rem",
+    marginBlock: "1.5rem",
     marginLeft: "auto",
     marginRight: "auto",
-});
-
-export const semesterSelect = style({
-    width: "24%",
-    height: "40px",
-    border: "1px solid #D9D9D9",
-    borderRadius: "4px",
-    // marginTop: "0.2rem",
-    paddingLeft: "1rem",
-    fontSize: "1.1rem",
-    backgroundColor: "#D9D9D980",
-    
+    paddingInline: "0.5rem",
+    paddingBlock: "0.7rem",
 });
 
 export const signupButton = style({
@@ -84,4 +74,5 @@ export const signInLink = style({
     fontWeight: "bold",
     marginLeft: "10px",
     textDecoration: "underline",
+    cursor: "pointer",
 });
