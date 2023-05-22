@@ -52,9 +52,9 @@ const homeApi = {
   // },
 
   // 강의 조회
-  // getCourses: async ({}: any) => {
-  //   return await clientApi.get("/lectures?lectureYear=2022");
-  // },
+  getLectures: async ({}: any) => {
+    return await clientApi.get("/lectures?lectureYear=2022");
+  },
 
   //유저에 해당하는 강의 조회
   getLectureForUser: async ({ id }: any) => {

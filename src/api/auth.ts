@@ -1,7 +1,4 @@
-import axios from "axios";
 import clientApi from "./axios";
-
-const baseURL = process.env.SERVER_URL || "http://localhost:3000";
 
 export interface LoginProps {
   classID: string;
