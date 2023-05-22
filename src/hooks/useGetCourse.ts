@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import homeApi from "../api/home";
 import { CourseQueryType } from "../components/Curriculum/courseData";
 
