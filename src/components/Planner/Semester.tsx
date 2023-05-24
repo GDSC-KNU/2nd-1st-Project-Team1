@@ -48,6 +48,7 @@ interface IColumnProps {
   backGroundColor?: string;
   active?: boolean;
   grade?: number;
+  title?: string;
   semester?: number;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -61,6 +62,7 @@ const Semester = ({
   semesterBlock,
   courses,
   index,
+  title,
 }: IColumnProps) => {
   // const [classList, setClassList] = useState<ClassProps[]>([
   //   { id: "crtl1", className: "test", classCredit: "3", classType: "전공" },
@@ -97,7 +99,8 @@ const Semester = ({
         <div className={SemesterHeader}>
           {active ? (
             <h4 className={SemesterText}>
-              {grade}학년 {semester}학기
+              {/* {grade}학년 {semester}학기 */}
+              {title}
             </h4>
           ) : (
             <h4 className={SemesterText}></h4>

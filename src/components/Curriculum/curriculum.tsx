@@ -2,6 +2,7 @@ import { FormEventHandler, useEffect, useState } from "react";
 import { CourseQueryType, CourseType } from "./courseData";
 import * as style from "./curriculum.css";
 import useGetCourses from "../../hooks/useGetCourse";
+import { Draggable, Droppable } from "react-beautiful-dnd";
 
 const Curriculum = () => {
   const [query, setQuery] = useState<CourseQueryType>({
@@ -34,30 +35,51 @@ const Curriculum = () => {
     if (!data) return <div>No Data Found</div>;
     return (
       <>
-        {data.data.map((result: CourseType) => {
-          return (
-            <div className={style.resultWrapper} key={result.code}>
-              <h3 className={style.resultTitle}>{result.name}</h3>
-              <div className={style.resultDetails}>
-                <span>{result.type} </span>
-                <span>{result.credit} </span>
-                <span>{result.code} </span>
-                <span>{result.grade} </span>
-                <span>{result.semester} </span>
-                {result.required && (
-                  <span className={style.resultDetailsRequired}>
-                    {result.required}{" "}
-                  </span>
-                )}
-                {result.design && (
-                  <span className={style.resultDetailsDesign}>
-                    {result.design}{" "}
-                  </span>
-                )}
-              </div>
+        <Droppable droppableId="CurruclumBlocks">
+          {provided => (
+            <div {...provided.droppableProps} ref={provided.innerRef}>
+              {data.data.map((result: CourseType, index: number) => {
+                return (
+                  <Draggable
+                    key={result.code + index}
+                    draggableId={result.code + index}
+                    index={index}
+                  >
+                    {provided => (
+                      <div
+                        className={style.resultWrapper}
+                        key={result.code}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        ref={provided.innerRef}
+                      >
+                        <h3 className={style.resultTitle}>{result.name}</h3>
+                        <div className={style.resultDetails}>
+                          <span>{result.type} </span>
+                          <span>{result.credit} </span>
+                          <span>{result.code} </span>
+                          <span>{result.grade} </span>
+                          <span>{result.semester} </span>
+                          {result.required && (
+                            <span className={style.resultDetailsRequired}>
+                              {result.required}{" "}
+                            </span>
+                          )}
+                          {result.design && (
+                            <span className={style.resultDetailsDesign}>
+                              {result.design}{" "}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </Draggable>
+                );
+              })}
+              {provided.placeholder}
             </div>
-          );
-        })}
+          )}
+        </Droppable>
       </>
     );
   };

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { PlannerContainer } from "./Planner.css";
 import { Droppable, Id } from "react-beautiful-dnd";
 import { IData } from "../../App";
+import { semesterSelect } from "../MyPage/BasicInfo.css";
 
 interface SemesterProps {
   backGroundColor?: string;
@@ -18,14 +19,6 @@ const Planner = ({ data }: { data: IData }) => {
   useEffect(() => {
     if (data) setTemp(data);
   }, [data]);
-  // const [semesterList, setSemesterList] = useState<SemesterProps[]>([]);
-  // const addSemester = (item: SemesterProps) => {
-  //   setSemesterList([...semesterList, item]);
-  // };
-  // const testSemester: SemesterProps = {
-  //   grade: 4,
-  //   semester: 4,
-  // };
   return (
     <div className={PlannerContainer}>
       <>
@@ -48,10 +41,11 @@ const Planner = ({ data }: { data: IData }) => {
                       index={index}
                       grade={semesterBlock.grade}
                       semester={semesterBlock.semester}
+                      title={semesterBlock.title}
                     />
                   );
                 })}
-              <Semester active={false} />
+              {/* <Semester active={false} /> */}
               {provided.placeholder}
             </div>
           )}
